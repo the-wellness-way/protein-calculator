@@ -1,0 +1,39 @@
+{
+    "name": "tww-protein",
+    "version": "1.0.0",
+    "description": "Health calculator by The Wellness Way. Easily calculate recomended daily intake protein.",
+    "main": "index.js",
+    "directories": {
+      "test": "tests"
+    },
+    "scripts": {
+      "plugin-zip": "wp-scripts plugin-zip --pack-destination=\"../../plugin-zips\""
+    },  
+    "keywords": [
+      "click",
+      "fraud"
+    ],
+    "author": "Philip Rudy",
+    "license": "GPL-2.0-or-later",
+    "homepage": "",
+    "files": [
+      "pages",
+      "resources",
+      "src",
+      "templates",
+      "vendor/composer",
+      "vendor/autoload.php",
+      ".gitignore",
+      "tww-protein.php",
+      "composer.json",
+      "composer.lock",
+      "package.json",
+      "package-lock.json",
+      "README.md",
+      "readme.txt"
+    ],
+    "devDependencies": {
+      "@wordpress/scripts": "^27.2.0"
+    }
+  }
+  

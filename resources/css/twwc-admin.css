@@ -1,0 +1,237 @@
+:root {
+    --brand-green: rgb(128, 183, 65);
+    --brand-grey: rgb(136, 136, 136);
+    --border-grey: rgb(204, 204, 204);
+    --border-grey-light: rgb(238, 238, 238);
+
+    --tww-green: #80b741;
+    --tww-dark-grey: #414444;
+    --tww-light-grey: #ddddde;
+    --tww-medium-light-grey: #d6d6d6;
+    --tww-beige: #dcd4cb;
+
+    --tww-white: white;
+
+    --black: rgb(0, 0, 0);
+    --red: rgb(153, 27, 27);
+
+    --active: rgb(220, 252, 231);
+    --active-alt: rgb(22, 101, 52);
+    --canceled: var(--red);
+    --pending: rgb(255, 255, 0);
+
+
+    --radio-switch-width: 186px;
+    --radio-switch-height: 46px;
+    --radio-switch-padding: 3px;
+    --radio-switch-radius: 50em;
+    --radio-switch-animation-duration: 0.3s;
+}
+
+.toplevel_page_twwc-calculator .wp-first-item {
+    display: none;
+}
+
+.twwc--page-title-wrapper h1:before  {
+    background-image: url('../images/twwlogo70.webp');
+    background-size: 160px 70px;
+    background-position: center;
+    content: '';
+    width: 160px;
+    height: 70px;
+    display: block;
+    position: absolute;
+    left: 0;
+}
+
+.twwc--page-title-wrapper h1 {
+    position: relative;
+    padding-left: 180px;
+    display: flex;
+    align-items: center;
+    height: 120px
+}
+
+.age-range {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.age-range label {
+    width: 75px;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 16px;
+    background-color: #f6f6f6;
+    border-radius: 4px;
+    padding: 5px;
+    text-align: center;
+    margin-right: 10px;
+    margin-top: 0;
+}
+
+.protien-calculator__goals {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.protein-calculator__activity-level-label {
+    font-weight: bold;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px 0 15px;
+}
+
+.protein-calculator__label .protein-calculator__activity-level-label   label {
+    margin-right: 5px;
+    font-weight: bold;
+    margin-left: 0;
+    margin-bottom:0;
+}
+
+.protein-calculator__goal {
+    background: var(--tww-beige);
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.protein-calculator__goal--static {
+    background: var(--tww-light-grey);
+}
+
+@media(max-widthL: 767px) {
+    .protein-calculator__goal {
+        width: 100%;
+    }
+}
+
+.protein-calculator__goal label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.protein-calculator__form-group span {
+    margin-right: 5px;
+    font-style: italic;
+}
+
+.protein-calculator__goal input {
+    width: 75px;
+}
+
+.protein-calculator__form-group {
+    padding: 20px 0;
+}
+
+.protein-calculator__label label {
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.protein-calculator__pregnant {
+    width: 75px;
+}
+
+.protein-calculator__activity-level-option-name {
+    font-weight: 300;
+}
+
+.twwc_embed_shortcode {
+    background: #fdfdff;
+    border-color: #d5d7e9;
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    color: #242748;
+    align-items: center;
+    border: 1px solid #d5d7e9;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inter,-apple-system,blinkmacsystemfont,"Segoe UI",roboto,oxygen-sans,ubuntu,cantarell,"Helvetica Neue",sans-serif;
+    font-size: .875rem;
+    font-weight: 500;
+    height: 2.375rem;
+    line-height: normal;
+    padding-block: 0;
+    padding-inline: 1.125rem;
+    position: relative;
+    text-decoration: none;
+    transition: transform .3s ease,box-shadow .3s ease,background-color .3s ease;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 10px;
+}
+
+.twwc_embed_shortcode-clicked.twwc_embed_shortcode:before {
+    opacity: 0;
+    transition: .3s all ease;
+}
+
+.twwc_embed_shortcode-clicked.twwc_embed_shortcode:before {
+    content: 'copied!';
+    display: inline-block;
+    background: slategray;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 11px;
+    position: absolute;
+    top: -15px;
+    right: 0;
+    opacity: 1;
+    transition: .3s all ease;
+}
+  
+.radio__switch-wrapper {
+    display: inline-flex;
+    padding: var(--radio-switch-padding);
+    border-radius: var(--radio-switch-radius);
+    border: 1px solid var(--color-contrast-low);
+}
+
+.radio__switch-wrapper {
+    height: calc(var(--radio-switch-height) - 2*var(--radio-switch-padding));
+    width: calc(var(--radio-switch-width)*0.5 - var(--radio-switch-padding));
+}
+
+.radio__switch-wrapper label {
+    display: block;
+    line-height: calc(var(--radio-switch-height) - 2*var(--radio-switch-padding));
+    text-align: center;
+    border-radius: var(--radio-switch-radius);
+}
+
+.radio__switch-item {
+    position: relative;
+}
+  
+.radio-switch__marker {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-primary);
+    border-radius: var(--radio-switch-radius); 
+    transition: transform var(--radio-switch-animation-duration);
+}
+
+.radio-switch__input:checked ~ & { 
+    transform: translateX(100%);
+}   
