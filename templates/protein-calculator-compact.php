@@ -5,7 +5,7 @@ $activity_level = $protein_settings['activity_level'] ?? null;
 $activity_level_default = $protein_settings['defaults'] && $protein_settings['defaults']['activity_level'] ? $protein_settings['defaults']['activity_level'] : null;
 $results_content = isset($protein_settings['content']) && isset($protein_settings['content']['results']) ? $protein_settings['content']['results'] : null;
 ?>
-
+<div class="protein-calculator-container">
 <div class="protein-calculator protein-calculator--compact">
     <div class="protein-calculator-inner">
         <form class="protein-calculator-form">
@@ -49,7 +49,11 @@ $results_content = isset($protein_settings['content']) && isset($protein_setting
                             <?php $label = $value['label'] ? $value['label'] : ucwords(str_replace('_', ' ', $key)); ?>
 
                             <?php if($value['enable']) :?>
-                                <option <?php echo $key === $activity_level_default ? 'default' : '' ; ?> value="<?php echo $key; ?>"><?php echo $label; ?></option>
+                                <option 
+                                    <?php echo esc_attr($key === $activity_level_default ? 'default' : ''); ?> 
+                                    value="<?php echo esc_attr($key); ?>">
+                                    <?php echo esc_html($label); ?>
+                                </option>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
@@ -89,7 +93,7 @@ $results_content = isset($protein_settings['content']) && isset($protein_setting
             }
         ?>
         <div class="protein-calculator--results">
-            <div class="protein-calculator--results-inner protein-calculator--results-range" style="background-color: <?php echo $bg_color; ?>">
+            <div class="protein-calculator--results-inner protein-calculator--results-range" style="background-color: <?php echo esc_attr($bg_color); ?>">
                 <div class="protein-calculator--results-default">
                     <div class="protein-calculator--results-low-end">
                         <div class="protein-calculator--results__label">
@@ -105,3 +109,4 @@ $results_content = isset($protein_settings['content']) && isset($protein_setting
         </div> <!-- Closing tag for protein-calculator--results -->
     </div><!-- Closing tag for protein-calculator-inner -->
 </div> <!-- Closing tag for protein-calculator -->
+</div>  

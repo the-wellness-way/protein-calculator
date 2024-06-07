@@ -107,8 +107,10 @@ class TwwcAdminMenu {
     public function enqueue_admin_scripts() {
         wp_enqueue_style('wp-color-picker');
 
-        wp_enqueue_style('twwc-admin-js', TWWC_PROTEIN_PLUGIN_URL . 'resources/css/twwc-admin.css', [], '1.32.3', 'all' );
-        wp_enqueue_script('twwc-admin-js', TWWC_PROTEIN_PLUGIN_URL . 'resources/js/twwc-admin.js', array( 'wp-color-picker' ), '1.32.4', true );
+        $version = '1.32.5';
+
+        wp_enqueue_style('twwc-admin-js', TWWC_PROTEIN_PLUGIN_URL . 'resources/css/twwc-admin.css', [], $version, 'all' );
+        wp_enqueue_script('twwc-admin-js', TWWC_PROTEIN_PLUGIN_URL . 'resources/js/twwc-admin.js', array( 'wp-color-picker' ), $version, true );
 
         wp_localize_script('twwc-admin-js', 'twwc_admin_object', [
             'settings' => $this->settings,

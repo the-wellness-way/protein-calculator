@@ -1,4 +1,4 @@
-=== TWW Protein Calculator Plugin ===
+=== TWW Protein Calculator ===
 Contributors: thewellnessway
 Tags: protein, calculator, health, wellness, nutrition
 Requires at least: 5.0

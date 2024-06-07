@@ -44,7 +44,7 @@ require_once 'vendor/autoload.php';
             if(strpos(site_url(), 'localhost') !== false) {
                 $version = null;
             } else {
-                $version = '1.0.75';
+                $version = '1.0.76';
             }
 
             wp_register_style('tww-protein', TWWC_PROTEIN_PLUGIN_URL . 'resources/css/tww-protein.css', [], $version, 'all');

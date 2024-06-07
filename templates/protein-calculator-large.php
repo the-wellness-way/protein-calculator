@@ -1,4 +1,12 @@
-<div class="protein-calculator-wrapper">
+<?php
+$bg_color = isset($settings['theme_options']['plugin_colors']) && isset($settings['theme_options']['plugin_colors']['primary']) ? $settings['theme_options']['plugin_colors']['primary'] : '#E6F1D9';
+$system = $protein_settings['system'] ?? null;
+$activity_level = $protein_settings['activity_level'] ?? null;
+$activity_level_default = $protein_settings['defaults'] && $protein_settings['defaults']['activity_level'] ? $protein_settings['defaults']['activity_level'] : null;
+$results_content = isset($protein_settings['content']) && isset($protein_settings['content']['results']) ? $protein_settings['content']['results'] : null;
+?>
+
+<div class="protein-calculator-wrapper protein-calculator-container">
     <div class="protein-calculator protein-calculator--large">
         <form class="protein-calculator-form">
             <div class="protein-calculator__form-group protein-calculator__form-group--radio">
@@ -62,7 +70,7 @@
                                 <?php $label = $value['label'] ? $value['label'] : ucwords(str_replace('_', ' ', $key)); ?>
 
                                 <?php if($value['enable']) :?>
-                                    <option value="<?php echo $key; ?>"><?php echo $label; ?></option>
+                                    <option value="<?php echo esc_attr($key); ?>"><?php echo esc_html($label); ?></option>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
@@ -90,24 +98,25 @@
         </form>
 
         <div class="protein-calculator--results protein-calculator--results-range">
-            <div class="protein-calculator--results-inner">     
-                <div class="protein-calculator--results-low-end">
+            <div class="protein-calculator--results-inner" style="background-color: <?php echo esc_attr($bg_color); ?>;">     
+                <div class="protein-calculator--results-low-end" style="margin-bottom: 20px;">
                     <div class="protein-calculator--results__label">
                         <label for="protein">Your Optimal Protein Intake</label>
                     </div>
                     <div class="protein-calculator--results__value">
-                        <span class='the-result'>&mdash;</span><span id="calculator-system-suffix">g</span>
+                        <span class='the-result'>&mdash;</span> 
+                        <p><span  id="calculator-system-suffix">grams/day</span>
                     </div>
                 </div>
-
-                <div class="protein-calculator--results-high-end">
+<!-- 
+                <div class="protein-calculator--results-high-end-label">
                     <div class="protein-calculator--results__label">
                         <label for="protein">Protein Intake <br />  (High End)</label>
                     </div>
                     <div class="protein-calculator--results__high-end">
-                        <span class='the-result-high'>&mdash;</span><span id="calculator-system-suffix">g</span>
+                        <span style="font-size: 16px" class='the-result-high'>&mdash;</span> <span id="calculator-system-suffix">grams/day</span>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="protein-message" style="margin-top: 20px;">
                     <div class="protein-data-requirements" style="font-size: 13px;">

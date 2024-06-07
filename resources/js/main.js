@@ -61,9 +61,7 @@ const twwc_initUnitsAndMeasures = () => {
     if(twwc_ui.toggleEls.length === 0) return;
     
     twwc_ui.unitsMeasurement.forEach((unit) => {    
-        unit.addEventListener('click', (e) => {
-            e.preventDefault();
-            
+        unit.addEventListener('click', (e) => {          
             twwc_setCalcData('converting', true);
             const system = document.querySelector('.protein-calculator__units-measurement:checked').value;
             twwc_ui.toggleEls.forEach((el) => {

@@ -12,28 +12,28 @@ class TwwcProteinCalculatorShortcode {
     }
 
     public function render_shortcode($atts, $content = null) {
-        ob_start();
-        $settings = TwwcOptions::get_option('settings', null);
-        $protein_settings = TwwcOptions::get_option('protein_settings', null);
-
-        $theme = $settings['theme_options']['default'] ?? 'compact';
-
-        $settings = [
-            'theme_options' => $settings['theme_options'],
-            'protein_settings' => $protein_settings
-        ];
-
         $version = '1.0.1';
+        
+        $settings = TwwcOptions::get_option('settings', null);
+        $protein_settings = TwwcOptions::get_option('protein_settings', null); 
         
         wp_enqueue_script('twwc-protein-object');
 
         if($settings && is_array($settings) && count($settings)) {
+            $settings = [
+                $theme = $settings['theme_options']['default'] ?? 'compact';
+
+                'theme_options' => $settings['theme_options'],
+                'protein_settings' => $protein_settings
+            ];
+    
             wp_localize_script('twwc-protein-object', 'twwc_object' , $settings );
         }
 
         wp_enqueue_script('tww-protein-main');
         wp_enqueue_script('tww-theme-compact-js');
 
+        ob_start();
         if($protein_settings && is_array($protein_settings) && count($protein_settings)) {
             if('compact' === $theme) {
                 require_once TWWC_PROTEIN_PLUGIN_PATH . 'templates/protein-calculator-compact.php';
