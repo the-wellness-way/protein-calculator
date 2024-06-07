@@ -20,9 +20,10 @@ class TwwcProteinCalculatorShortcode {
         wp_enqueue_script('twwc-protein-object');
 
         if($settings && is_array($settings) && count($settings)) {
-            $settings = [
-                $theme = $settings['theme_options']['default'] ?? 'compact';
+            $theme = $settings['theme_options']['default'] ?? 'compact';
 
+
+            $settings = [
                 'theme_options' => $settings['theme_options'],
                 'protein_settings' => $protein_settings
             ];
