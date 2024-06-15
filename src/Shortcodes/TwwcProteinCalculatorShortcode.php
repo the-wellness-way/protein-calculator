@@ -10,7 +10,7 @@ class TwwcProteinCalculatorShortcode {
         add_action('wp_enqueue_scripts', [$this, 'register_scripts']);
         add_shortcode('twwc_protein_calculator', [$this, 'render_shortcode']);
     }
-
+    
     public function render_shortcode($atts, $content = null) {
         $version = '1.0.1';
         

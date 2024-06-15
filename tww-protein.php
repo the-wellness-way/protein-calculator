@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: TWW Protein
+ * Plugin Name: TWW Protein Calculator
  * Author: The Wellness Way
  * Description: A plugin to calculate protein intake.
  * Version: 1.0.0

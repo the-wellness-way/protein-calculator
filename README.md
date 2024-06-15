@@ -64,3 +64,10 @@ For more detailed documentation and support, visit [The Wellness Way's support p
 ## License
 
 This plugin is licensed under the GPL-2.0+ license. Feel free to modify and distribute as needed.
+
+## Screenshots
+
+![Protein Calculator Activity](/screenshots/protein-calculator-activity "Protein Calculator Activity")
+![Protein Calculator Settings](/screenshots/protein-calculator-settings "Protein Calculator Settings")
+
+

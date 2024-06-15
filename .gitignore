@@ -1,0 +1,65 @@
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Operating system generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and editor generated files
+*.swp
+*.swo
+*.swn
+*.idea/
+.vscode/
+*.sublime*
+*.tmproj
+*.komodoproject
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.save
+
+# Node modules and debug logs
+node_modules/
+npm-debug.log*
+
+# Dependency directories
+bower_components/
+
+# Environment files
+.env
+
+# Distribution directory
+/dist
+
+# Compiled files and cache directories
+*.pyc
+*.pyo
+__pycache__/
+*.sass-cache
+*.scss-cache
+*.less-cache
+*.map
+
+# OS generated
+*.DS_Store
+*.DS_Store?
+.Trashes
+*.swp
+*.thumb
+
+dev.env
+.phpunit.result.cache
+cache
+
+node_modules/*
+
