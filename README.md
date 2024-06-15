@@ -67,7 +67,7 @@ This plugin is licensed under the GPL-2.0+ license. Feel free to modify and dist
 
 ## Screenshots
 
-![Protein Calculator Activity](/screenshots/protein-calculator-activity "Protein Calculator Activity")
-![Protein Calculator Settings](/screenshots/protein-calculator-settings "Protein Calculator Settings")
+![Protein Calculator Activity](/screenshots/protein-calculator-activity.png "Protein Calculator Activity")
+![Protein Calculator Settings](/screenshots/protein-calculator-settings.png "Protein Calculator Settings")
 
 
