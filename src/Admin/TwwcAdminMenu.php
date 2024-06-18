@@ -285,7 +285,8 @@ class TwwcAdminMenu {
                                 $goal_key_lbs = str_replace('kg', 'lbs', $goal_key);
 
                                 $value_to_convert = $valid_input['activity_level'][$activity_level]['goal'][$goal_key_lbs];
-                                $valid_input['activity_level'][$activity_level]['goal'][$goal_key] = $this->generate_value_int($value_to_convert, $default);
+                                $value = $this->convert_multiplier_to_kg_value($value_to_convert);
+                                $valid_input['activity_level'][$activity_level]['goal'][$goal_key] = $this->generate_value_int($value, $default);
                             }
                         }
                     } else { // example key here: m_super_active_lbs
@@ -296,7 +297,9 @@ class TwwcAdminMenu {
                         } else {
                             $key_lbs = str_replace('kg', 'lbs', $key);
                             $value = $this->convert_multiplier_to_kg_value($valid_input['activity_level'][$activity_level][$key_lbs]);
+
                             $valid_input['activity_level'][$activity_level][$key] = $this->generate_value_int($value, $maybe_default);
+
                         }
                     }
                 }
@@ -309,7 +312,7 @@ class TwwcAdminMenu {
                     $valid_input[$key] = $this->generate_value_int($value, $default);
                 } else {
                     $key_kg = str_replace('lbs', 'kg', $key);
-                    $value = $this->convert_multiplier_to_kg_value($valid_input[$key_kg]);
+                    $value = $this->convert_multiplier_to_lbs_value($valid_input[$key_kg]);
                     $valid_input[$key] = $this->generate_value_int($value, $default);
                 }
             }
@@ -336,7 +339,8 @@ class TwwcAdminMenu {
                             } else {
                                 $goal_key_lbs = str_replace('lbs', 'kg', $goal_key);
                                 $value_to_convert = $valid_input['activity_level'][$activity_level]['goal'][$goal_key_lbs];
-                                $valid_input['activity_level'][$activity_level]['goal'][$goal_key] = $this->generate_value_int($value_to_convert, $default);
+                                $value = $this->convert_multiplier_to_lbs_value($value_to_convert);
+                                $valid_input['activity_level'][$activity_level]['goal'][$goal_key] = $this->generate_value_int($value, $default);
                             }
                         }
                     } else { // example key here: m_super_active_lbs

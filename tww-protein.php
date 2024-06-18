@@ -10,7 +10,7 @@ if(!defined('ABSPATH')) {
 }
 
 if(!defined('TWWC_ASSETS_VERSION')) {
-    define('TWWC_ASSETS_VERSION', '1.0.1');
+    define('TWWC_ASSETS_VERSION', '1.0.2');
 }
 
 if(!defined('TWWC_PROTEIN_PLUGIN_PATH')) {
@@ -44,7 +44,7 @@ require_once 'vendor/autoload.php';
             if(strpos(site_url(), 'localhost') !== false) {
                 $version = null;
             } else {
-                $version = '1.0.76';
+                $version = '1.0.77';
             }
 
             wp_register_style('tww-protein', TWWC_PROTEIN_PLUGIN_URL . 'resources/css/tww-protein.css', [], $version, 'all');
