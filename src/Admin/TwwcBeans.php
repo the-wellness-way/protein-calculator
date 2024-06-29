@@ -1,6 +1,13 @@
 <?php
 namespace TwwcProtein\Admin;
 class TwwcBeans {
+    public static $goal_keys = [
+        'maintain',
+        'toning',
+        'muscle_growth',
+        'weight_loss',     
+    ];
+
     public static $settings_keys_strings = [
         'plugin_colors' => [
             'primary'=> '#E6F1D9',
@@ -10,20 +17,24 @@ class TwwcBeans {
     public static $protein_keys_strings = [
         'system' => 'imperial'
     ];
+    
     public static $protein_keys_ints = [
         'pregnant' => '',
         'pregnant_lactating' => ''
     ];
+
     public static $protein_keys_arrays = [
         'content' => [],
         'defaults' => []
     ];
+
     public static $protein_keys_weight_ints = [
         'multiplier_weight_lbs' => '',
         'multiplier_weight_kg' => '',
         'multiplier_weight_high_lbs' => '',
         'multiplier_weight_high_kg' => ''
     ];
+
     public static $protein_keys_activity_levels_ints = [
         'sedentary' => [
             'enable' => '',
@@ -151,6 +162,7 @@ class TwwcBeans {
             ]
         ]
     ];
+
     public static $protein_keys_activity_levels_strings = [
         'sedentary' => [
             'label' => ''
