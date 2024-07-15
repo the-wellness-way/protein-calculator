@@ -5,9 +5,9 @@ use TwwcProtein\Admin\TwwcAdminMenu;
 use WP_UnitTestCase;
 
 class Test_TwwcAdminMenu extends WP_UnitTestCase {
-    private $int_keys = [
+    private $float_keys = [
         'one_key' => '',
-        'two_key' => '7'
+        'two_key' => '7.5'
     ];
 
     private $protein_settings_input = [];
@@ -22,10 +22,10 @@ class Test_TwwcAdminMenu extends WP_UnitTestCase {
     }
 
     /**
-     * @covers TwwcProtein\Admin\TwwcAdminMenu::generate_value_int
+     * @covers TwwcProtein\Admin\TwwcAdminMenu::generate_value_float
      * @group adminMenu
      */
-    public function test_generate_value_int_returns_defaults_with_missing_keys() {
+    public function test_generate_value_float_returns_defaults_with_missing_keys() {
         $valid_input = [];
         $input = [
             'wrongkey' => '',
@@ -34,18 +34,18 @@ class Test_TwwcAdminMenu extends WP_UnitTestCase {
 
         $twwcAdminMenu = new TwwcAdminMenu();
 
-        foreach($this->int_keys as $key => $default) {
-            $valid_input[$key] = isset($input[$key]) ? $twwcAdminMenu->generate_value_int($input[$key], $default) : $default;
+        foreach($this->float_keys as $key => $default) {
+            $valid_input[$key] = isset($input[$key]) ? $twwcAdminMenu->generate_value_float($input[$key]) : $default;
         }
 
-        $this->assertEquals($this->int_keys, $valid_input);
+        $this->assertEquals($this->float_keys, $valid_input);
     }
 
     /**
-     * @covers TwwcProtein\Admin\TwwcAdminMenu::generate_value_int
+     * @covers TwwcProtein\Admin\TwwcAdminMenu::generate_value_float
      * @group adminMenu
      */
-    public function test_generate_value_int_returns_defaults_with_zero() {
+    public function test_generate_value_float_returns_null_with_zero() {
         $valid_input = [];
 
         $input = [
@@ -55,11 +55,34 @@ class Test_TwwcAdminMenu extends WP_UnitTestCase {
 
         $twwcAdminMenu = new TwwcAdminMenu();
 
-        foreach($this->int_keys as $key => $default) {
-            $valid_input[$key] = isset($input[$key]) ? $twwcAdminMenu->generate_value_int($input[$key], $default) : $default;
+        foreach($this->float_keys as $key => $default) {
+            $valid_input[$key] = isset($input[$key]) ? $twwcAdminMenu->generate_value_float($input[$key]) : $default;
         }
 
-        $this->assertEquals($this->int_keys, $valid_input);
+        $this->assertEquals([
+            'one_key' => null,
+            'two_key' => null
+        ], $valid_input);
+    }
+
+    public function test_generate_value_float_returns_valid_float() {
+        $valid_input = [];
+
+        $input = [
+            'one_key' => .61,
+            'two_key' => 1.34
+        ];
+
+        $twwcAdminMenu = new TwwcAdminMenu();
+
+        foreach($this->float_keys as $key => $default) {
+            $valid_input[$key] = isset($input[$key]) ? $twwcAdminMenu->generate_value_float($input[$key]) : $default;
+        }
+
+        $this->assertEquals([
+           'one_key' => .61,
+            'two_key' => 1.34 
+        ], $valid_input);
     }
 
     /**

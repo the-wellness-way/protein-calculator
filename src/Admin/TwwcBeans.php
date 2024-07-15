@@ -37,7 +37,7 @@ class TwwcBeans {
 
     public static $protein_keys_activity_levels_ints = [
         'sedentary' => [
-            'enable' => '',
+            'enable' => 1,
             'm_sedentary_lbs' => '',
             'm_sedentary_kg' => '',
             'm_sedentary_high_lbs' => '',
@@ -62,7 +62,7 @@ class TwwcBeans {
             ]
         ],
         'lightly_active' => [
-            'enable' => '',
+            'enable' => 1,
             'm_lightly_active_lbs' => '',
             'm_lightly_active_kg' => '',
             'm_lightly_active_high_lbs' => '',
@@ -87,7 +87,7 @@ class TwwcBeans {
             ]
         ],
         'moderately_active' => [
-            'enable' => '',
+            'enable' => 1,
             'm_moderately_active_lbs' => '',
             'm_moderately_active_kg' => '',
             'm_moderately_active_high_lbs' => '',
@@ -112,7 +112,7 @@ class TwwcBeans {
             ]
         ],
         'very_active' => [
-            'enable' => '',
+            'enable' => 1,
             'm_very_active_lbs' => '',
             'm_very_active_kg' => '',
             'm_very_active_high_lbs' => '',
@@ -137,7 +137,7 @@ class TwwcBeans {
             ]
         ],
         'super_active' => [
-            'enable' => '',
+            'enable' => 1,
             'm_super_active_lbs' => '',
             'm_super_active_kg' => '',
             'm_super_active_high_lbs' => '',
