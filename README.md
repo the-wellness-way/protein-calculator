@@ -55,7 +55,7 @@ Admins can set various parameters through the plugin's settings page:
 
 ## Customizing and Extending
 
-Developers can extend the functionality of the plugin by modifying the JavaScript calculations or the PHP backend logic. Custom styles can be applied to match the calculator with the theme of the site.
+Developers can extend the functionality of the plugin by modifying the JavaScript calculations or the PHP backend logic. Custom styles can be applied to match the calculator with the theme of the site. For an example of what caluclating looks, checkout [this page](https://www.thewellnessway.com/protein-calculator) which is hosting the protein calcualtor.
 
 ## Documentation and Support
 
