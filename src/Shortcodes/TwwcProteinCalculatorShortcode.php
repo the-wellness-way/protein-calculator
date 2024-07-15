@@ -23,8 +23,6 @@ class TwwcProteinCalculatorShortcode {
 
         if($settings && is_array($settings) && count($settings)) {
             $theme = $settings['theme_options']['default'] ?? 'compact';
-
-
             $settings = [
                 'theme_options' => $settings['theme_options'],
                 'protein_settings' => $protein_settings
@@ -51,7 +49,7 @@ class TwwcProteinCalculatorShortcode {
     }
 
     public function register_scripts() {
-            $version = '1.0.79';
+            $version = '1.0.80';
 
             wp_register_script('twwc-protein-object', TWWC_PROTEIN_PLUGIN_URL . 'resources/js/vars.js',  [], $version, true);
             wp_register_script('tww-protein-main', TWWC_PROTEIN_PLUGIN_URL . 'resources/js/main.js', [], $version, true);

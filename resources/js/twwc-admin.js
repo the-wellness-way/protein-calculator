@@ -17,7 +17,26 @@ const ui = {
     weight: document.querySelector('.protein-calculator__weight'),
     metricInputs: document.querySelectorAll('.protein-calculator__metric-input'),
     imperialInputs: document.querySelectorAll('.protein-calculator__imperial-input'),
+    activityLevelEnable: document.querySelectorAll('.protein-calculator__activity-level-enable'),
 };
+
+const initManageEnableValue = () => {
+  console.log(',amag')
+  if(ui.activityLevelEnable.length) {
+    console.log("inside manage")
+    ui.activityLevelEnable.forEach(input => {
+      input.addEventListener('click', (e) => {
+        console.log(e.target.checked)
+        console.log(e.target.value)
+        if (e.target.checked) {
+          e.target.value = 1 
+        } else {
+          e.target.value = 0
+        }
+      })
+    })
+  }
+}
 
 const initSystem = () => {
     ui.system.forEach(system => {
@@ -274,6 +293,8 @@ const Defaults = {
     if(clearButton) {
         initClearButton();
     }
+
+    initManageEnableValue();
 })();
 
 

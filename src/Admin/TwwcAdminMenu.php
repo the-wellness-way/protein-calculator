@@ -1,14 +1,19 @@
 <?php
 namespace TwwcProtein\Admin;
 
+use PHPCSExtra\Universal\Sniffs\Arrays\MixedKeyedUnkeyedArraySniff;
 use TwwcProtein\Options\TwwcOptions;
 use TwwcProtein\Admin\TwwcBeans;
 
 class TwwcAdminMenu {
     const PAGE_IDENTIFIER = 'twwc-calculator';
+
     const PAGE_IDENTIFIER_PROTEIN = 'twwc-protein-calculator';
+
     const PAGE_TEMPLATE = 'dashboard';
+
     const COMMON_SETTINGS_PAGE = 'twwc-common-settings';
+
     const PROTEIN_CALCULATOR_SETTINGS_PAGE = 'twwc-protein-calculator-settings';
 
     private $option_group = 'settings';
@@ -24,6 +29,8 @@ class TwwcAdminMenu {
     private $settings = [];
 
     private $protein_settings = [];
+
+    private $protein_settings_input = [];
 
     private $activity_levels = [
         'Sedentary',
@@ -56,12 +63,12 @@ class TwwcAdminMenu {
         $this->option_name_protein  = $this->prefix . $this->option_name_protein;
     }
 
-    public function register_hooks() {
+    public function register_hooks(): void {
         add_action('admin_menu', [$this, 'register_pages']);
         add_action('admin_init', [$this, 'register_common_settings']);
     }
 
-    public function register_pages() {
+    public function register_pages(): void {
         $manage_capability = $this->get_manage_capability();
         $page_identifier = $this->get_page_identifier();
 
@@ -100,11 +107,11 @@ class TwwcAdminMenu {
         add_action( 'load-' . $anotherSubmenu, [$this, 'do_admin_enqueue'] );
     }
 
-    public function do_admin_enqueue() {
+    public function do_admin_enqueue(): void {
         add_action( 'admin_enqueue_scripts', [$this, 'enqueue_admin_scripts'] );
     }
 
-    public function enqueue_admin_scripts() {
+    public function enqueue_admin_scripts(): void {
         wp_enqueue_style('wp-color-picker');
 
         $version = '1.32.5';
@@ -118,9 +125,8 @@ class TwwcAdminMenu {
         ]);
     }
 
-    public function register_common_settings() {
+    public function register_common_settings(): void {
         /**
-         * 
          * Overall settings
          */
         add_settings_section(
@@ -150,9 +156,6 @@ class TwwcAdminMenu {
         );
 
         /**
-         * 
-         * 
-         * 
          * Protein Calculator Settings
          */
         add_settings_section(
@@ -161,8 +164,7 @@ class TwwcAdminMenu {
             [$this, 'protein_calculator_settings_output'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             []
-        );
-
+        ); 
         
         add_settings_field(
             'twwc-system',
@@ -204,9 +206,9 @@ class TwwcAdminMenu {
         register_setting('twwc-protein-calculator-options', $this->option_group_protein, [$this, 'convert_and_update_options']);
     }
 
-    public function validate_common_settings($input) {
+    public function validate_common_settings($input): array {
         $valid_input = [];
-
+        
         // foreach(TwwcBeans::$settings_keys_strings as $key => $value) {
         //     if('plugin_color' === $key) {
         //         foreach($value as $field_key => $default) {
@@ -219,20 +221,57 @@ class TwwcAdminMenu {
         return $input;
     }
 
-    public function generate_value_string($value, $default = '') {
+    public function generate_value_string($value, $default = ''): string {
         return $value && is_string($value) ? $value : $default;
     }
 
-    public function generate_value_int($value, $default = '') {
-        return (0 != $value || '0' != $value) ? $value : $default;
+    public function generate_value_float($value): mixed {
+        $value = (float) $value;
+        
+        return $value && 0.0 !== $value ? $value : null;
     }
 
-    public function generate_value_array($value, $default = []) {
+    public function generate_value_array($value, $default = []): array {
         return isset($value) && is_array($value) ? $value : $default;
     }
 
-    public function convert_and_update_options(array $input) {
-        $valid_input = $this->get_protein_settings();
+    public function generate_valid_goal_values(array $goals = [], string $activity_level = ''): array {
+        $goal_input = [];
+    
+        if (!$this->protein_settings_input) {
+            return $goal_input;
+        }
+    
+        $system = $this->protein_settings_input['system'];
+        $main_unit  = 'imperial' === $system ? 'lbs' : 'kg';
+        $mirror_unit = 'imperial' === $system ? 'kg' : 'lbs';
+        $callback = 'convert_multiplier_to_' . $mirror_unit . '_value';
+    
+        if ($goals && $activity_level && isset($this->protein_settings_input['activity_level'])) {
+            foreach ($goals as $goal_key => $default) {
+                $goal_value = $this->protein_settings_input['activity_level'][$activity_level]['goal'][$goal_key] ?? $default;
+    
+                if (false === strpos($goal_key, $mirror_unit)) {
+                    $goal_input[$goal_key] = $this->generate_value_float($goal_value) ?? $default;
+                } else {
+                    $goal_key_main_unit = str_replace($mirror_unit, $main_unit, $goal_key);
+    
+                    $value_to_convert = $this->protein_settings_input['activity_level'][$activity_level]['goal'][$goal_key_main_unit] ?? $default;
+                    $value = call_user_func([$this, $callback], $value_to_convert);
+                    $goal_input[$goal_key] = $this->generate_value_float($value) ?? $default;
+                }
+            }
+        }
+        
+        return $goal_input;
+    }
+
+    public function convert_and_update_options(array $input): array {
+        $this->set_protein_settings_input($input); 
+
+        //So we don't have to do too many 'isset' checks
+        $valid_input = array_merge($this->get_protein_settings(), $input);
+
     
         $system = isset($input['system']) && is_string($input['system']) ? $input['system'] : 'imperial';
         $valid_input['system'] = $system;
@@ -245,7 +284,7 @@ class TwwcAdminMenu {
         }
     
         foreach (TwwcBeans::$protein_keys_ints as $key => $default) {
-            $valid_input[$key] = $this->generate_value_int($input[$key], $default);
+            $valid_input[$key] = $this->generate_value_float($input[$key]) ?? $default;
         }
     
         foreach (TwwcBeans::$protein_keys_arrays as $key => $default) {
@@ -256,50 +295,39 @@ class TwwcAdminMenu {
         if ('imperial' === $system) {
             foreach (TwwcBeans::$protein_keys_weight_ints as $key => $default) {
                 $value = $input[$key] ?? $default;
-                if (strpos($key, 'kg') === false) {
-                    $valid_input[$key] = $this->generate_value_int($value, $default);
+                if (false === strpos($key, 'kg')) {
+                    $valid_input[$key] = $this->generate_value_float($value) ?? $default;
                 } else {
                     $key_lbs = str_replace('kg', 'lbs', $key);
                     $value = $this->convert_multiplier_to_kg_value($valid_input[$key_lbs]);
-                    $valid_input[$key] = $this->generate_value_int($value, $default);
+                    $valid_input[$key] = $this->generate_value_float($value) ?? $default;
                 }
             }
     
             foreach (TwwcBeans::$protein_keys_activity_levels_ints as $activity_level => $fields) {
+                $this->activity_level = $activity_level;
+
                 foreach ($fields as $key => $maybe_default) {
                     if ('enable' === $key) {
-                        $value = $input['activity_level'][$activity_level]['enable'] ?? $maybe_default;
-                        $valid_input['activity_level'][$activity_level]['enable'] = $this->generate_value_int($value, $maybe_default);
+                        $value = $input['activity_level'][$activity_level]['enable'] ?? 0;
+                        $valid_input['activity_level'][$activity_level]['enable'] = (int) $value ?? $maybe_default;
 
                         continue;
                     }
     
                     if ('goal' === $key && is_array($maybe_default)) {
-                        $goals = $maybe_default;
-                        foreach ($goals as $goal_key => $default) {
-                            $goal_value = $input['activity_level'][$activity_level]['goal'][$goal_key] ?? '';
-    
-                            if (strpos($goal_key, 'kg') === false) {
-                                $valid_input['activity_level'][$activity_level]['goal'][$goal_key] = $this->generate_value_int($goal_value, $default);
-                            } else {
-                                $goal_key_lbs = str_replace('kg', 'lbs', $goal_key);
-
-                                $value_to_convert = $valid_input['activity_level'][$activity_level]['goal'][$goal_key_lbs];
-                                $value = $this->convert_multiplier_to_kg_value($value_to_convert);
-                                $valid_input['activity_level'][$activity_level]['goal'][$goal_key] = $this->generate_value_int($value, $default);
-                            }
-                        }
+                        // $maybe_default is an array that contains the goals in this case, and therefore obviously not the default value
+                        $valid_input['activity_level'][$activity_level]['goal'] = $this->generate_valid_goal_values($maybe_default, $activity_level);
                     } else { // example key here: m_super_active_lbs
-                        $value = $input['activity_level'][$activity_level][$key] ?? '';
+                        $value = $input['activity_level'][$activity_level][$key] ?? $maybe_default;
 
-                        if (strpos($key, 'kg') === false) {
-                            $valid_input['activity_level'][$activity_level][$key] = $this->generate_value_int($value, $maybe_default);
+                        if (false === strpos($key, 'kg')) {
+                            $valid_input['activity_level'][$activity_level][$key] = $this->generate_value_float($value) ?? $maybe_default;
                         } else {
                             $key_lbs = str_replace('kg', 'lbs', $key);
                             $value = $this->convert_multiplier_to_kg_value($valid_input['activity_level'][$activity_level][$key_lbs]);
 
-                            $valid_input['activity_level'][$activity_level][$key] = $this->generate_value_int($value, $maybe_default);
-
+                            $valid_input['activity_level'][$activity_level][$key] = $this->generate_value_float($value) ?? $maybe_default;
                         }
                     }
                 }
@@ -308,50 +336,37 @@ class TwwcAdminMenu {
             foreach (TwwcBeans::$protein_keys_weight_ints as $key => $default) {
                 $value = $input[$key] ?? $default;
 
-                if (strpos($key, 'lbs') === false) {
-                    $valid_input[$key] = $this->generate_value_int($value, $default);
+                if (false === strpos($key, 'lbs')) {
+                    $valid_input[$key] = $this->generate_value_float($value) ?? $default;
                 } else {
                     $key_kg = str_replace('lbs', 'kg', $key);
                     $value = $this->convert_multiplier_to_lbs_value($valid_input[$key_kg]);
-                    $valid_input[$key] = $this->generate_value_int($value, $default);
+                    $valid_input[$key] = $this->generate_value_float($value) ?? $default;
                 }
             }
     
             foreach (TwwcBeans::$protein_keys_activity_levels_ints as $activity_level => $fields) {
                 foreach ($fields as $key => $maybe_default) {
                     if ('enable' === $key) {
-                        $value = $input['activity_level'][$activity_level]['enable'] ?? $default;
-
-                        $value = $input['activity_level'][$activity_level]['enable'];
-                        $valid_input['activity_level'][$activity_level]['enable'] = $this->generate_value_int($value, $maybe_default);
+                        $value = $input['activity_level'][$activity_level]['enable'] ?? 0;
+                        $valid_input['activity_level'][$activity_level]['enable'] = $value;
                         
                         continue;
                     }
     
                     if ('goal' === $key && is_array($maybe_default)) {
-                        $goals = $maybe_default;
-
-                        foreach ($goals as $goal_key => $default) {
-                            $goal_value = $input['activity_level'][$activity_level]['goal'][$goal_key] ?? $default;
-
-                            if (strpos($goal_key, 'lbs') === false) {
-                                $valid_input['activity_level'][$activity_level]['goal'][$goal_key] = $this->generate_value_int($goal_value, $default);
-                            } else {
-                                $goal_key_lbs = str_replace('lbs', 'kg', $goal_key);
-                                $value_to_convert = $valid_input['activity_level'][$activity_level]['goal'][$goal_key_lbs];
-                                $value = $this->convert_multiplier_to_lbs_value($value_to_convert);
-                                $valid_input['activity_level'][$activity_level]['goal'][$goal_key] = $this->generate_value_int($value, $default);
-                            }
-                        }
+                        // $maybe_default is an array that contains the goals in this case, and therefore obviously not the default value
+                        $valid_input['activity_level'][$activity_level]['goal'] = $this->generate_valid_goal_values($maybe_default, $activity_level);
                     } else { // example key here: m_super_active_lbs
-                        $value = $input['activity_level'][$activity_level][$key] ?? $default;
+                        $value = $input['activity_level'][$activity_level][$key] ?? $maybe_default;
 
-                        if (strpos($key, 'lbs') === false) {
-                            $valid_input['activity_level'][$activity_level][$key] = $this->generate_value_int($value, $maybe_default);
+                        if (false === strpos($key, 'lbs')) {
+                            $valid_input['activity_level'][$activity_level][$key] = $this->generate_value_float($value) ?? $maybe_default;
                         } else {
                             $key_kg = str_replace('lbs', 'kg', $key);
+
                             $value = $this->convert_multiplier_to_lbs_value($valid_input['activity_level'][$activity_level][$key_kg]);
-                            $valid_input['activity_level'][$activity_level][$key] = $this->generate_value_int($value, $maybe_default);
+                            $valid_input['activity_level'][$activity_level][$key] = $this->generate_value_float($value) ?? $maybe_default;
                         }
                     }
                 }
@@ -360,19 +375,18 @@ class TwwcAdminMenu {
     
         return $valid_input;
     }
-    
 
-    public function get_page_identifier()
+    public function get_page_identifier(): string
     {
         return self::PAGE_IDENTIFIER;
     }
 
-    public function get_manage_capability()
+    public function get_manage_capability(): string
     {
         return 'manage_options';
     }
 
-    public function show_page()
+    public function show_page(): void
     {
         require_once TWWC_PROTEIN_PLUGIN_PATH . 'pages/' . self::PAGE_TEMPLATE . '.php';
     }
@@ -382,8 +396,7 @@ class TwwcAdminMenu {
      * 
      * 
      */
-     
-    public function default_theme_callback() {
+    public function default_theme_callback(): void {
         $options = TwwcOptions::get_option($this->option_name);
         $value = isset($options['theme_options']['default']) ? $options['theme_options']['default'] : 'compact';
 
@@ -396,7 +409,7 @@ class TwwcAdminMenu {
         ";
     }
 
-    public function plugin_colors_callback() {
+    public function plugin_colors_callback(): void {
         $options = TwwcOptions::get_option($this->option_name);
         $value = isset($options['theme_options']['plugin_colors']['primary']) && !empty($options['theme_options']['plugin_colors']['primary']) ? $options['theme_options']['plugin_colors']['primary'] : '#E6F1D9';
 
@@ -414,13 +427,13 @@ class TwwcAdminMenu {
      *
      *
      */
-    public function protein_calculator_settings_output() {
+    public function protein_calculator_settings_output(): void {
         echo '
         <p>Embed shortcode: <span id="embed-shortcode" class="twwc_embed_shortcode" data-clipboard-text="[twwc_protein_calculator]">&lt;/&gt; [twwc_protein_calculator]</span></p>
         <p><a class="protein-calculator__default" target="_blank" href="#">Populate Demo Data</a> - <a class="protein-calculator__clear" target="_blank" href="#">Clear Data</a>';
     }
 
-    public function default_system_callback() {
+    public function default_system_callback(): void {
         $options = TwwcOptions::get_option($this->option_name_protein);
         $value = isset($options['system']) ? $options['system'] : 'imperial';
         echo " 
@@ -431,7 +444,7 @@ class TwwcAdminMenu {
         ";
     }
 
-    public function pregnant_callback() {
+    public function pregnant_callback(): void {
         $settings = TwwcOptions::get_option($this->option_name_protein, []);
 
         $value = isset($settings['pregnant']) ? $settings['pregnant'] : '';
@@ -451,7 +464,7 @@ class TwwcAdminMenu {
         ";
     }
 
-    public function weight_callback() {
+    public function weight_callback(): void {
         $options = TwwcOptions::get_option($this->option_name_protein);
         
         $value = isset($options['multiplier_weight_lbs']) ? $options['multiplier_weight_lbs'] : '';
@@ -485,7 +498,7 @@ class TwwcAdminMenu {
         ";
     }
 
-    public function activity_level_callback() {
+    public function activity_level_callback(): void {
         $options = TwwcOptions::get_option($this->option_name_protein);
         $class = !empty($value) ? 'has-value' : 'required-value-missing-notice';
         $system = isset($options['system']) ? $options['system'] : 'imperial';
@@ -498,9 +511,8 @@ class TwwcAdminMenu {
 
             $activity_level_label = $activity_level_value[$activity_level]['label'] ?? null;
 
-            $activity_level_enabled = isset($activity_level_value[$activity_level]['enable']) 
-                ? (intval($activity_level_value[$activity_level]['enable']) === 0 ? intval($activity_level_value[$activity_level]['enable']) : 1) 
-                : 0;
+            //initially enable it
+            $activity_level_enabled = isset($activity_level_value[$activity_level]['enable']) ? $activity_level_value[$activity_level]['enable'] : 1;
 
             $activity_level_default = $options['defaults']['activity_level'] ?? '';
 
@@ -532,7 +544,7 @@ class TwwcAdminMenu {
                 <div class='protein-calculator__label'>
                     <div class='protein-calculator__enable'>
                         <label for='activity-level'>".esc_html($activity_level)."</label>
-                        <input type='checkbox' name='".esc_attr($this->option_name_protein)."[activity_level][" . esc_attr($activity_level) ."][enable]' value='1' ".(isset($activity_level_enabled) && 1 == $activity_level_enabled ? 'checked' : '')." /> <span>Enable</span>
+                        <input id='enabled-".$activity_level."' class='protein-calculator__activity-level-enable' type='checkbox' name='".esc_attr($this->option_name_protein)."[activity_level][" . esc_attr($activity_level) ."][enable]' value='".$activity_level_enabled."' ".(isset($activity_level_enabled) && 1 == $activity_level_enabled ? 'checked' : '')." /> <span>Enable</span>
                         <input type='radio' name='".esc_attr($this->option_name_protein)."[defaults][activity_level]' value='".esc_html($activity_level)."' ".($activity_level_default == $activity_level ? 'checked' : '')." /> <span>Set as Default</span>
                     </div>
                     <div class='protein-calculator__activity-level-label'>
@@ -594,7 +606,7 @@ class TwwcAdminMenu {
         }
     }
 
-    public function convert_multiplier_to_lbs_value($multiplier) {
+    public function convert_multiplier_to_lbs_value($multiplier): mixed {
         if(!$multiplier) {
             return '';
         }
@@ -603,7 +615,7 @@ class TwwcAdminMenu {
         return round($multiplier * 0.453592, 2);
     }
 
-    public function convert_multiplier_to_kg_value($multiplier) {
+    public function convert_multiplier_to_kg_value($multiplier): mixed {
         if(!$multiplier) {
             return '';
         }
@@ -612,15 +624,23 @@ class TwwcAdminMenu {
         return round($multiplier / 0.453592, 2);
     } 
 
-    public function get_protein_settings() {
+    public function set_protein_settings_input(array $settings = []): void {
+        $this->protein_settings_input = $settings;
+    }
+
+    public function get_protein_settings_input(): array {
+        return $this->protein_settings_input;
+    }
+
+    public function get_protein_settings(): array {
         return $this->protein_settings && is_array($this->protein_settings) ? $this->protein_settings : [];
     }
 
-    public static function get_settings_page() {
+    public static function get_settings_page(): string {
         return self::COMMON_SETTINGS_PAGE;
     }
 
-    public static function get_tab_two() {
+    public static function get_tab_two(): string {
         return self::PROTEIN_CALCULATOR_SETTINGS_PAGE;
     }
 }

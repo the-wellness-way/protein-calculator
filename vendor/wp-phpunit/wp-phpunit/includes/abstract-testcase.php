@@ -548,10 +548,10 @@ abstract class WP_UnitTestCase_Base extends PHPUnit_Adapter_TestCase {
 			$annotations = $this->getAnnotations();
 		} else {
 			// PHPUnit >= 9.5.0.
-			$annotations = \PHPUnit\Util\Test::parseTestMethodAnnotations(
-				static::class,
-				$this->getName( false )
-			);
+			// $annotations = \PHPUnit\Util\Test::parseTestMethodAnnotations(
+			// 	static::class,
+			// 	$this->getName( false )
+			// );
 		}
 
 		foreach ( array( 'class', 'method' ) as $depth ) {

@@ -23,17 +23,34 @@ iF(!defined('TWWC_PROTEIN_PLUGIN_URL')) {
 
 require_once 'vendor/autoload.php';
 
- class TwwcProtein {}
+use TwwcProtein\Options\TwwcOptions;
+use TwwcProtein\Setup\TwwcInstallSchema;
+
+ class TwwcProtein {
+    public function activate() {
+        $installed_settings = TwwcOptions::get_option('settings');
+        if(!$installed_settings) {
+            $install_settings = TwwcInstallSchema::install_settings();
+        }
+
+        $installed_protein_settings = TwwcOptions::get_option('protein_settings');
+        if(!$installed_protein_settings) {
+            $install_protein_settings = TwwcInstallSchema::install_protein_settings();
+        }
+    }
+ }
+
+ $twwcProtein = new TwwcProtein();
+ register_activation_hook(__FILE__, [$twwcProtein, 'activate']);
+ register_deactivation_hook(__FILE__, [$twwcProtein, 'deactivate']);
  
  use TwwcProtein\Shortcodes\TwwcProteinCalculatorShortcode;
 
  use TwwcProtein\Admin\TwwcAdminMenu;
- use TwwcProtein\Options\TwwcOptions;
 
  add_action('init', function() {      
         $twwcOptions = new TwwcOptions();
         $twwcroteinCalculatorShortcode = new TwwcProteinCalculatorShortcode();
-        $twwcrotein = new TwwcProtein();
         $twwAdminMenu = new TwwcAdminMenu();
         $twwAdminMenu->register_hooks();
 

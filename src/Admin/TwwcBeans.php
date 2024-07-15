@@ -1,6 +1,13 @@
 <?php
 namespace TwwcProtein\Admin;
 class TwwcBeans {
+    public static $goal_keys = [
+        'maintain',
+        'toning',
+        'muscle_growth',
+        'weight_loss',     
+    ];
+
     public static $settings_keys_strings = [
         'plugin_colors' => [
             'primary'=> '#E6F1D9',
@@ -10,23 +17,27 @@ class TwwcBeans {
     public static $protein_keys_strings = [
         'system' => 'imperial'
     ];
+    
     public static $protein_keys_ints = [
         'pregnant' => '',
         'pregnant_lactating' => ''
     ];
+
     public static $protein_keys_arrays = [
         'content' => [],
         'defaults' => []
     ];
+
     public static $protein_keys_weight_ints = [
         'multiplier_weight_lbs' => '',
         'multiplier_weight_kg' => '',
         'multiplier_weight_high_lbs' => '',
         'multiplier_weight_high_kg' => ''
     ];
+
     public static $protein_keys_activity_levels_ints = [
         'sedentary' => [
-            'enable' => '',
+            'enable' => 1,
             'm_sedentary_lbs' => '',
             'm_sedentary_kg' => '',
             'm_sedentary_high_lbs' => '',
@@ -51,7 +62,7 @@ class TwwcBeans {
             ]
         ],
         'lightly_active' => [
-            'enable' => '',
+            'enable' => 1,
             'm_lightly_active_lbs' => '',
             'm_lightly_active_kg' => '',
             'm_lightly_active_high_lbs' => '',
@@ -76,7 +87,7 @@ class TwwcBeans {
             ]
         ],
         'moderately_active' => [
-            'enable' => '',
+            'enable' => 1,
             'm_moderately_active_lbs' => '',
             'm_moderately_active_kg' => '',
             'm_moderately_active_high_lbs' => '',
@@ -101,7 +112,7 @@ class TwwcBeans {
             ]
         ],
         'very_active' => [
-            'enable' => '',
+            'enable' => 1,
             'm_very_active_lbs' => '',
             'm_very_active_kg' => '',
             'm_very_active_high_lbs' => '',
@@ -126,7 +137,7 @@ class TwwcBeans {
             ]
         ],
         'super_active' => [
-            'enable' => '',
+            'enable' => 1,
             'm_super_active_lbs' => '',
             'm_super_active_kg' => '',
             'm_super_active_high_lbs' => '',
@@ -151,6 +162,7 @@ class TwwcBeans {
             ]
         ]
     ];
+
     public static $protein_keys_activity_levels_strings = [
         'sedentary' => [
             'label' => ''
