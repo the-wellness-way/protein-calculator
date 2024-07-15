@@ -18,7 +18,7 @@ if(!defined('ABSPATH')) {
 }
 
 if(!defined('TWWC_ASSETS_VERSION')) {
-    define('TWWC_ASSETS_VERSION', '1.03');
+    define('TWWC_ASSETS_VERSION', '1.0.3');
 }
 
 if(!defined('TWWC_PROTEIN_PLUGIN_PATH')) {
