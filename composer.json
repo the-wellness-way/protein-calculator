@@ -1,9 +1,9 @@
 {
-    "name": "prudy/tww-protein",
+    "name": "prudy/twwc-protein",
     "type": "wordpress-plugin",
     "autoload": {
         "psr-4": {
-            "TwwcProtein\\": "src/",
+            "TwwcProtein\\": "src/"
         }
     },
     "autoload-dev": {

@@ -6,7 +6,7 @@
     </testsuite>
   </testsuites>
   <php>
-    <env name="WP_PHPUNIT__DIR" value="/app/wp-content/plugins/tww-protein/vendor/wp-phpunit/wp-phpunit"/>
+    <env name="WP_PHPUNIT__DIR" value="/app/wp-content/plugins/twwc-protein/vendor/wp-phpunit/wp-phpunit"/>
     <env name="WP_PHPUNIT__TESTS_CONFIG" value="/app/wp-tests-config.php"/>
     <ini name="error_log" value="php://stdout"/>
   </php>

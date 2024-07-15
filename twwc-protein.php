@@ -4,13 +4,21 @@
  * Author: The Wellness Way
  * Description: A plugin to calculate protein intake.
  * Version: 1.0.0
+ * Requires at least: 5.0
+ * Requires PHP: 5.6.20
+ * Author: Bluefield Identity Inc.
+ * Author URI: https://www.thewellnessway.com/
+ * License: GPLv2
+ * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * Text Domain: twwc-protein
+ * Domain Path: /languages/
  */
 if(!defined('ABSPATH')) {
     exit;
 }
 
 if(!defined('TWWC_ASSETS_VERSION')) {
-    define('TWWC_ASSETS_VERSION', '1.0.2');
+    define('TWWC_ASSETS_VERSION', '1.03');
 }
 
 if(!defined('TWWC_PROTEIN_PLUGIN_PATH')) {
@@ -64,8 +72,8 @@ use TwwcProtein\Setup\TwwcInstallSchema;
                 $version = '1.0.77';
             }
 
-            wp_register_style('tww-protein', TWWC_PROTEIN_PLUGIN_URL . 'resources/css/tww-protein.css', [], $version, 'all');
-            wp_enqueue_style('tww-protein');
+            wp_register_style('twwc-protein', TWWC_PROTEIN_PLUGIN_URL . 'resources/css/twwc-protein.css', [], $version, 'all');
+            wp_enqueue_style('twwc-protein');
         }
  });
 

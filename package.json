@@ -1,5 +1,5 @@
 {
-    "name": "tww-protein",
+    "name": "twwc-protein",
     "version": "1.0.0",
     "description": "Health calculator by The Wellness Way. Easily calculate recomended daily intake protein.",
     "main": "index.js",
@@ -23,7 +23,7 @@
       "vendor/composer",
       "vendor/autoload.php",
       ".gitignore",
-      "tww-protein.php",
+      "twwc-protein.php",
       "composer.json",
       "composer.lock",
       "package.json",

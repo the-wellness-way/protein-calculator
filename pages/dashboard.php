@@ -1,3 +1,6 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; ?>
+
 <div class="protein-calculator-container wrap" id="tww-admin">
 
 <div class="twwc--page-title-wrapper">
@@ -14,7 +17,7 @@
 
 <div class="bluefield_content_wrapper">
     <?php
-        $page_indentifier = 'twwc-calculator';
+        $page_indentifier = 'twwc-protein';
         $settings_slug  = TwwcAdminMenu::get_settings_page();
         $tab_two        =  TwwcAdminMenu::get_tab_two();
 
@@ -22,7 +25,7 @@
     ?>
 
     <h2 class="nav-tab-wrapper">
-        <a href="?page=twwc-calculator" class="nav-tab <?php echo ($active_tab == $settings_slug || $active_tab == $page_indentifier) ? 'nav-tab-active' : ''; ?>">Settings</a>
+        <a href="?page=twwc-protein" class="nav-tab <?php echo ($active_tab == $settings_slug || $active_tab == $page_indentifier) ? 'nav-tab-active' : ''; ?>">Settings</a>
         <a href="?page=twwc-protein-calculator-settings" class="nav-tab <?php echo $active_tab == $tab_two ? 'nav-tab-active' : ''; ?>">Protein Calculator</a>
     </h2>
 

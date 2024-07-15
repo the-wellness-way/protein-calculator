@@ -6,7 +6,7 @@ use TwwcProtein\Options\TwwcOptions;
 use TwwcProtein\Admin\TwwcBeans;
 
 class TwwcAdminMenu {
-    const PAGE_IDENTIFIER = 'twwc-calculator';
+    const PAGE_IDENTIFIER = 'twwc-protein';
 
     const PAGE_IDENTIFIER_PROTEIN = 'twwc-protein-calculator';
 
@@ -73,7 +73,7 @@ class TwwcAdminMenu {
         $page_identifier = $this->get_page_identifier();
 
         $menu = add_menu_page(
-            'TWW Calculator: ' . __('Dashboard', 'twwc-calculator'),
+            'TWW Calculator: ' . __('Dashboard', 'twwc-protein'),
             'TWW Calculator',
             $manage_capability,
             $page_identifier,
@@ -84,8 +84,8 @@ class TwwcAdminMenu {
 
         $submenu = add_submenu_page(
             $page_identifier,
-            'TWW Calculator: ' . __('Settings', 'twwc-calculator'),
-            __('Settings', 'twwc-calculator'),
+            'TWW Calculator: ' . __('Settings', 'twwc-protein'),
+            __('Settings', 'twwc-protein'),
             $manage_capability,
             self::COMMON_SETTINGS_PAGE,
             [$this, 'show_page'],
@@ -94,8 +94,8 @@ class TwwcAdminMenu {
 
         $anotherSubmenu = add_submenu_page(
             $page_identifier,
-            'TWW Calculator: ' . __('Protein Calculator', 'twwc-calculator'),
-            __('Protein Calculator', 'twwc-calculator'),
+            'TWW Calculator: ' . __('Protein Calculator', 'twwc-protein'),
+            __('Protein Calculator', 'twwc-protein'),
             $manage_capability,
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             [$this, 'show_page'],
@@ -131,7 +131,7 @@ class TwwcAdminMenu {
          */
         add_settings_section(
             'twwc-common-settings-section',
-            __('TWWC Settings', 'twwc-calculator'),
+            __('TWWC Settings', 'twwc-protein'),
             null,
             self::COMMON_SETTINGS_PAGE,
             []
@@ -139,7 +139,7 @@ class TwwcAdminMenu {
 
         add_settings_field(
             'twwc-theme_options',
-            '<span class="required">*</span> '. __('Default Theme', 'twwc-calculator'),
+            '<span class="required">*</span> '. __('Default Theme', 'twwc-protein'),
             [$this, 'default_theme_callback'],
             self::COMMON_SETTINGS_PAGE,
             'twwc-common-settings-section',
@@ -148,7 +148,7 @@ class TwwcAdminMenu {
 
         add_settings_field(
             'twwc-plugin_colors',
-            '<span class="required">*</span> '. __('Plugin Colors', 'twwc-calculator'),
+            '<span class="required">*</span> '. __('Plugin Colors', 'twwc-protein'),
             [$this, 'plugin_colors_callback'],
             self::COMMON_SETTINGS_PAGE,
             'twwc-common-settings-section',
@@ -160,7 +160,7 @@ class TwwcAdminMenu {
          */
         add_settings_section(
             'twwc-protein-calculator-settings-section',
-            __('TWWC Settings', 'twwc-calculator'),
+            __('TWWC Settings', 'twwc-protein'),
             [$this, 'protein_calculator_settings_output'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             []
@@ -168,7 +168,7 @@ class TwwcAdminMenu {
         
         add_settings_field(
             'twwc-system',
-            '<span class="required">*</span> '. __('Default Units & Measurement', 'twwc-calculator'),
+            '<span class="required">*</span> '. __('Default Units & Measurement', 'twwc-protein'),
             [$this, 'default_system_callback'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             'twwc-protein-calculator-settings-section',
@@ -177,7 +177,7 @@ class TwwcAdminMenu {
 
         add_settings_field(
             'twwc-weight',
-            '<span class="required">*</span> '. __('Weight', 'twwc-calculator'),
+            '<span class="required">*</span> '. __('Weight', 'twwc-protein'),
             [$this, 'weight_callback'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             'twwc-protein-calculator-settings-section',
@@ -186,7 +186,7 @@ class TwwcAdminMenu {
 
         add_settings_field(
             'twwc-pregnant',
-            '<span class="required">*</span> '. __('Pregnant/Lactating', 'twwc-calculator'),
+            '<span class="required">*</span> '. __('Pregnant/Lactating', 'twwc-protein'),
             [$this, 'pregnant_callback'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             'twwc-protein-calculator-settings-section',
@@ -195,7 +195,7 @@ class TwwcAdminMenu {
 
         add_settings_field(
             'twwc-activity_level',
-            '<span class="required">*</span> '. __('Activity Level', 'twwc-calculator'),
+            '<span class="required">*</span> '. __('Activity Level', 'twwc-protein'),
             [$this, 'activity_level_callback'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             'twwc-protein-calculator-settings-section',

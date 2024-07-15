@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'WP_Mock\\' => array($vendorDir . '/10up/wp_mock/php/WP_Mock'),
+    'TwwcProtein\\Tests\\' => array($baseDir . '/tests'),
     'TwwcProtein\\' => array($baseDir . '/src'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
