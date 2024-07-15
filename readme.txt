@@ -22,7 +22,7 @@ The TWW Protein Calculator Plugin for WordPress provides a simple, yet powerful 
 
 == Installation ==
 
-1. Upload `tww-protein-calculator` to the `/wp-content/plugins/` directory.
+1. Upload `twwc-protein-calculator` to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Place the shortcode `[twwc_protein_calculator]` in your posts or pages to display the protein calculator.
 

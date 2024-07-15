@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'prudy/tww-protein',
+        'name' => 'prudy/twwc-protein',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
         'reference' => 'a28cabdfc0258a79b15be8ae448122e6a97ed6f9',
@@ -181,7 +181,7 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
-        'prudy/tww-protein' => array(
+        'prudy/twwc-protein' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'reference' => 'a28cabdfc0258a79b15be8ae448122e6a97ed6f9',

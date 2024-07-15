@@ -25,6 +25,7 @@ class ComposerStaticInit5d1322e8485c7a98b7b806942eb9fc2a
         ),
         'T' => 
         array (
+            'TwwcProtein\\Tests\\' => 18,
             'TwwcProtein\\' => 12,
         ),
         'S' => 
@@ -58,6 +59,10 @@ class ComposerStaticInit5d1322e8485c7a98b7b806942eb9fc2a
         'WP_Mock\\' => 
         array (
             0 => __DIR__ . '/..' . '/10up/wp_mock/php/WP_Mock',
+        ),
+        'TwwcProtein\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
         ),
         'TwwcProtein\\' => 
         array (

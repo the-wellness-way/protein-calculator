@@ -31,7 +31,7 @@ class TwwcProteinCalculatorShortcode {
             wp_localize_script('twwc-protein-object', 'twwc_object' , $settings );
         }
 
-        wp_enqueue_script('tww-protein-main');
+        wp_enqueue_script('twwc-protein-main');
         wp_enqueue_script('tww-theme-compact-js');
 
         ob_start();
@@ -52,7 +52,7 @@ class TwwcProteinCalculatorShortcode {
             $version = '1.0.80';
 
             wp_register_script('twwc-protein-object', TWWC_PROTEIN_PLUGIN_URL . 'resources/js/vars.js',  [], $version, true);
-            wp_register_script('tww-protein-main', TWWC_PROTEIN_PLUGIN_URL . 'resources/js/main.js', [], $version, true);
+            wp_register_script('twwc-protein-main', TWWC_PROTEIN_PLUGIN_URL . 'resources/js/main.js', [], $version, true);
             wp_register_script('tww-theme-compact-js', TWWC_PROTEIN_PLUGIN_URL . 'resources/js/theme-compact.js', [], $version, true);
     }
 }
