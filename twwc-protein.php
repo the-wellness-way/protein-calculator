@@ -4,6 +4,7 @@
  * Author: The Wellness Way
  * Description: A plugin to calculate protein intake.
  * Version: 1.0.0
+ * Tested up to: 6.6
  * Requires at least: 5.0
  * Requires PHP: 5.6.20
  * Author: Bluefield Identity Inc.
@@ -18,7 +19,7 @@ if(!defined('ABSPATH')) {
 }
 
 if(!defined('TWWC_ASSETS_VERSION')) {
-    define('TWWC_ASSETS_VERSION', '1.03');
+    define('TWWC_ASSETS_VERSION', '1.0.3');
 }
 
 if(!defined('TWWC_PROTEIN_PLUGIN_PATH')) {
