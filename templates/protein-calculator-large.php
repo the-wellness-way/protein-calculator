@@ -2,11 +2,19 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $bg_color = isset($settings['theme_options']['plugin_colors']) && isset($settings['theme_options']['plugin_colors']['primary']) ? $settings['theme_options']['plugin_colors']['primary'] : '#E6F1D9';
+$fields_color_value = isset($settings['theme_options']['plugin_colors']) && isset($settings['theme_options']['plugin_colors']['fields_color']) ? $settings['theme_options']['plugin_colors']['fields_color'] : '#80b741';
 $system = $protein_settings['system'] ?? null;
 $activity_level = $protein_settings['activity_level'] ?? null;
 $activity_level_default = $protein_settings['defaults'] && $protein_settings['defaults']['activity_level'] ? $protein_settings['defaults']['activity_level'] : null;
 $results_content = isset($protein_settings['content']) && isset($protein_settings['content']['results']) ? $protein_settings['content']['results'] : null;
 ?>
+
+<style>
+    .protein-calculator__inputs--radio label {
+        <?php echo "border-color: ".$fields_color_value." !important;"; ?>
+        <?php echo "color: ".$fields_color_value." !important;"; ?>
+    }
+</style>
 
 <div class="protein-calculator-wrapper protein-calculator-container">
     <div class="protein-calculator protein-calculator--large">

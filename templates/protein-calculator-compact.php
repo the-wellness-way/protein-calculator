@@ -1,7 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$bg_color = isset($settings['theme_options']['plugin_colors']) && isset($settings['theme_options']['plugin_colors']['primary']) ? $settings['theme_options']['plugin_colors']['primary'] : '#E6F1D9';
+$primary_color = isset($settings['theme_options']['plugin_colors']) && isset($settings['theme_options']['plugin_colors']['primary']) ? $settings['theme_options']['plugin_colors']['primary'] : '#E6F1D9';
+$fields_color_value = isset($settings['theme_options']['plugin_colors']) && isset($settings['theme_options']['plugin_colors']['fields_color']) ? $settings['theme_options']['plugin_colors']['fields_color'] : '#80b741';
 $system = $protein_settings['system'] ?? null;
 $activity_level = $protein_settings['activity_level'] ?? null;
 $activity_level_default = $protein_settings['defaults'] && $protein_settings['defaults']['activity_level'] ? $protein_settings['defaults']['activity_level'] : null;
@@ -15,6 +16,12 @@ $results_content = isset($protein_settings['content']) && isset($protein_setting
                 <div class="protein-calculator__label">
                     <label class="main-label" for="Units">Goal Weight</label>
                 </div>
+
+                <style>
+                    .protein-calculator__inputs--radio-reg-label input[type="radio"]:checked + label {
+                        <?php echo "background-color: ".$fields_color_value." !important;"; ?>
+                    }
+                </style>
 
                 <!-- here we will have a radio toggle for the units after the input -->
                 <div class="protein-calculator__inputs ">
@@ -95,7 +102,7 @@ $results_content = isset($protein_settings['content']) && isset($protein_setting
             }
         ?>
         <div class="protein-calculator--results">
-            <div class="protein-calculator--results-inner protein-calculator--results-range" style="background-color: <?php echo esc_attr($bg_color); ?>">
+            <div class="protein-calculator--results-inner protein-calculator--results-range" style="background-color: <?php echo esc_attr($primary_color); ?>">
                 <div class="protein-calculator--results-default">
                     <div class="protein-calculator--results-low-end">
                         <div class="protein-calculator--results__label">

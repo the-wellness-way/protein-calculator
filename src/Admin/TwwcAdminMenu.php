@@ -412,11 +412,16 @@ class TwwcAdminMenu {
     public function plugin_colors_callback(): void {
         $options = TwwcOptions::get_option($this->option_name);
         $value = isset($options['theme_options']['plugin_colors']['primary']) && !empty($options['theme_options']['plugin_colors']['primary']) ? $options['theme_options']['plugin_colors']['primary'] : '#E6F1D9';
+        $fields_color_value = isset($options['theme_options']['plugin_colors']['fields_color']) && !empty($options['theme_options']['plugin_colors']['fields_color']) ? $options['theme_options']['plugin_colors']['fields_color'] : '#80b741';
 
         echo '
-            <div class="form-group">
+            <div class="plugin-colors form-group">
                 <label for="plugin-color-primary">Brand Primary</label>
                 <input class="twwc-plugin-colors" type="text" name="' . esc_attr($this->option_name) . '[theme_options][plugin_colors][primary]" value="' . esc_attr($value) . '" />
+            </div>
+            <div class="plugin-colors form-group">
+                <label for="plugin-color-fields">Fields Color</label>
+                <input class="twwc-plugin-colors" type="text" name="' . esc_attr($this->option_name) . '[theme_options][plugin_colors][fields_color]" value="' . esc_attr($fields_color_value) . '" />
             </div>
         ';
     }
