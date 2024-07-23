@@ -21,7 +21,6 @@ class TwwcInstallSchema {
 
         return TwwcOptions::update_option('settings', $settings);
     }
-
     public static function install_protein_settings() {
         $protein_settings = [
             "system" => "metric",
