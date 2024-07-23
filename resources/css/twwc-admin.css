@@ -235,3 +235,12 @@
 .radio-switch__input:checked ~ & { 
     transform: translateX(100%);
 }   
+
+.plugin-colors.form-group {
+    margin-bottom: 10px;
+}
+
+.plugin-colors.form-group label {
+    width: 100px;
+    display: inline-block;
+}
