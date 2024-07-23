@@ -1,0 +1,102 @@
+.food-items-container {
+    --brand-green: rgb(128, 183, 65);
+    --brand-grey: rgb(136, 136, 136);
+    --border-grey: rgb(204, 204, 204);
+    --border-grey-light: rgb(238, 238, 238);
+
+    --tww-green: #80b741;
+    --tww-dark-grey: #414444;
+    --tww-medium-grey: #6d6d6d;
+    --tww-medium-light-grey: #a8a8a8;
+    --tww-light-grey: #ddddde;
+    --tww-medium-light-grey: #d6d6d6;
+    --tww-beige: #dcd4cb;
+
+    --tww-white: white;
+
+    --black: rgb(0, 0, 0);
+    --red: rgb(153, 27, 27);
+
+    --active: rgb(220, 252, 231);
+    --active-alt: rgb(22, 101, 52);
+    --canceled: var(--red);
+    --pending: rgb(255, 255, 0);
+}
+
+.food-items__form-inner {
+    display: flex;
+    align-items: center;
+}
+
+.food-items__form-inner input[type="text"], 
+ .food-items__form-inner input[type="number"],
+ .food-items__form-inner select {
+    height: 50px;
+    color: var(--tww-dark-grey) !important;
+ }
+
+ /* .food-items__form-inner input:focus,
+.food-items__form-inner select:focus {
+    border-color: var(--tww-green) !important; 
+} */
+
+.food-items__form-inner input {
+    background-color: #fff;
+    border-radius: 4px 4px 0 0;
+    padding: 10px;
+    font-family: inherit;
+    line-height: 24px;
+    color: var(--tww-dark-grey);
+    border: 1px solid var(--tww-light-grey);
+    transition: all .2s ease;
+    outline: none;
+    align-items: center;
+}
+
+.food-items__input:nth-child(even) {
+    margin: 0 10px;
+}
+
+.food-items__input-inner {
+    display: flex;
+}
+
+.food-items__input-inner input {
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.food-items__input-inner span {
+    background: var(--tww-light-grey);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border-radius: 0 4px 4px 0;
+    min-width: 65px;
+}
+
+select.food-items__items {
+    margin-bottom: 0 !important;
+    min-width: 250px;
+    border-radius: 4px;
+}
+
+.food-items__input {
+    margin: 0 10px;
+}
+
+.food-items__equals {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.food-items__equals img {
+    width: 45px;
+}

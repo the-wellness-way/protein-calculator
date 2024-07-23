@@ -1,4 +1,5 @@
 <?php
+use TwwcProtein\Admin\TwwcAdminFoodItems;
 /**
  * Plugin Name: TWW Protein Calculator
  * Author: The Wellness Way
@@ -54,12 +55,15 @@ use TwwcProtein\Setup\TwwcInstallSchema;
  register_deactivation_hook(__FILE__, [$twwcProtein, 'deactivate']);
  
  use TwwcProtein\Shortcodes\TwwcProteinCalculatorShortcode;
+ use TwwcProtein\Shortcodes\TwwcFoodItemsCalculatorShortcode;
 
  use TwwcProtein\Admin\TwwcAdminMenu;
 
  add_action('init', function() {      
         $twwcOptions = new TwwcOptions();
-        $twwcroteinCalculatorShortcode = new TwwcProteinCalculatorShortcode();
+        $twwProteinCalculatorShortcode = new TwwcProteinCalculatorShortcode();
+        $twwcFoodItemsCalculatorShortcode = new TwwcFoodItemsCalculatorShortcode();
+
         $twwAdminMenu = new TwwcAdminMenu();
         $twwAdminMenu->register_hooks();
 
