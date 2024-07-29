@@ -100,3 +100,22 @@ select.food-items__items {
 .food-items__equals img {
     width: 45px;
 }
+
+@media (max-width: 767px) {
+	.food-items__input {
+		width: 100%;
+	}
+	
+	.food-items__form-inner {
+		flex-wrap: wrap;
+	}
+
+	.food-items__input,
+    .food-items__input:nth-child(2n) {
+        margin: 0 0 10px 0 !important;
+    }
+
+	.food-items__equals {
+		margin: auto !important;
+	}
+}

@@ -55,7 +55,7 @@ abstract class TwwcShortcodes {
                 $handle,
                 $resource,
                 ['jquery'],
-                TWW_FORMS_ASSETS_VERSION,
+                TWWC_PROTEIN_ASSETS_VERSION,
                 true
             );
         }
@@ -75,7 +75,7 @@ abstract class TwwcShortcodes {
                 $handle,
                 $resource,
                 [],
-                TWW_FORMS_ASSETS_VERSION,
+                TWWC_PROTEIN_ASSETS_VERSION,
                 'all'
             );
         }

@@ -8,6 +8,7 @@ $activity_level = $protein_settings['activity_level'] ?? null;
 $activity_level_default = $protein_settings['defaults'] && $protein_settings['defaults']['activity_level'] ? $protein_settings['defaults']['activity_level'] : null;
 $results_content = isset($protein_settings['content']) && isset($protein_settings['content']['results']) ? $protein_settings['content']['results'] : null;
 ?>
+
 <div class="protein-calculator-container">
 <div class="protein-calculator protein-calculator--compact">
     <div class="protein-calculator-inner">

@@ -26,7 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; ?>
 
     <h2 class="nav-tab-wrapper">
         <a href="?page=twwc-protein" class="nav-tab <?php echo ($active_tab == $settings_slug || $active_tab == $page_indentifier) ? 'nav-tab-active' : ''; ?>">Settings</a>
-        <a href="?page=twwc-protein-calculator-settings" class="nav-tab <?php echo $active_tab == $tab_two ? 'nav-tab-active' : ''; ?>">Protein Calculator</a>    </h2>
+        <a href="?page=twwc-protein-calculator-settings" class="nav-tab <?php echo $active_tab == $tab_two ? 'nav-tab-active' : ''; ?>">Protein Calculator</a>    
+        <a href="?page=twwc-food-items-settings" class="nav-tab <?php echo $active_tab == 'twwc-food-items-settings'? 'nav-tab-active' : ''; ?>">Food Items</a>    </h2>
 
     <form method="post" action="options.php">
         <?php
@@ -37,6 +38,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; ?>
             } elseif( $active_tab === $tab_two ) {
                 settings_fields('twwc-protein-calculator-options');
                 do_settings_sections($tab_two);
+                submit_button();
+            } elseif( $active_tab === 'twwc-food-items-settings' ) {
+                settings_fields('twwc-food-items-options');
+                do_settings_sections('twwc-food-items-settings');
                 submit_button();
             }
         ?>
