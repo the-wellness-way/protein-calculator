@@ -3,7 +3,7 @@
         'name' => 'prudy/twwc-protein',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'fff660c1fdf15e3c19c7c8c6a68ef0ef074c76b1',
+        'reference' => '373bd7e2bf189616d21087f7a42899104a5002ec',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'prudy/twwc-protein' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'fff660c1fdf15e3c19c7c8c6a68ef0ef074c76b1',
+            'reference' => '373bd7e2bf189616d21087f7a42899104a5002ec',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

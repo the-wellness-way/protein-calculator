@@ -1,5 +1,6 @@
 <?php
 namespace TwwcProtein\Shortcodes;
+use TwwcProtein\Includes\TwwcFoodItemsModel;
 
 class TwwcFoodItemsCalculatorShortcode extends TwwcShortcodes {
     public function set_sc_settings() {
@@ -20,6 +21,9 @@ class TwwcFoodItemsCalculatorShortcode extends TwwcShortcodes {
 
         if($this->sc_settings['handle']) {
             wp_enqueue_script($this->sc_settings['handle']);
+            $food_items_model = new TwwcFoodItemsModel();
+
+            wp_localize_script($this->sc_settings['handle'], 'twwc__fitems', $food_items_model->get_fitems_js_data());
         }
 
         $atts = shortcode_atts([

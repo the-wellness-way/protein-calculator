@@ -1,10 +1,9 @@
 <?php
-use TwwcProtein\Admin\TwwcAdminFoodItems;
 /**
  * Plugin Name: TWW Protein Calculator
  * Author: The Wellness Way
  * Description: A plugin to calculate protein intake.
- * Version: 1.0.0
+ * Version: 1.0.2
  * Tested up to: 6.6
  * Requires at least: 5.0
  * Requires PHP: 5.6.20
@@ -20,44 +19,67 @@ if(!defined('ABSPATH')) {
 }
 
 if(!defined('TWWC_ASSETS_VERSION')) {
-    define('TWWC_ASSETS_VERSION', '1.0.3');
+    define('TWWC_ASSETS_VERSION', '1.0.31');
 }
 
 if(!defined('TWWC_PROTEIN_PLUGIN_PATH')) {
     define('TWWC_PROTEIN_PLUGIN_PATH', plugin_dir_path(__FILE__));
 }
 
-iF(!defined('TWWC_PROTEIN_PLUGIN_URL')) {
+if(!defined('TWWC_PROTEIN_PLUGIN_URL')) {
     define('TWWC_PROTEIN_PLUGIN_URL', plugin_dir_url(__FILE__));
+}
+
+if(!defined('TWWC_PROTEIN_ASSETS_VERSION')) {
+    define('TWWC_PROTEIN_ASSETS_VERSION', plugin_dir_url(__FILE__));
 }
 
 require_once 'vendor/autoload.php';
 
 use TwwcProtein\Options\TwwcOptions;
-use TwwcProtein\Setup\TwwcInstallSchema;
 
  class TwwcProtein {
     public function activate() {
-        $installed_settings = TwwcOptions::get_option('settings');
-        if(!$installed_settings) {
-            $install_settings = TwwcInstallSchema::install_settings();
-        }
+        $plugin_settings = TwwcOptions::get_option('settings', null);
+        $plugin_protein_settings = TwwcOptions::get_option('protein_settings', null);
+        $food_items = new \WP_Query(
+            [
+                'post_type' => 'twwc_food_items',
+                'post_status' => 'publish',
+            ]
+        );
 
-        $installed_protein_settings = TwwcOptions::get_option('protein_settings');
-        if(!$installed_protein_settings) {
-            $install_protein_settings = TwwcInstallSchema::install_protein_settings();
+        $twwc_install_settings = [
+            'settings' => $plugin_settings ? true : false,
+            'protein_settings' => $plugin_protein_settings ? true : false,
+            'food_items' => $food_items->have_posts() ? true : false,
+        ];
+
+        foreach($twwc_install_settings as $wp_option => $value) {
+            if($value) {
+                continue;
+            }
+
+            //e.g. convert protein_settings to TwwcInstallProtein_SettingsSchema
+            $install_handler_classname = 'TwwcProtein\Setup\TwwcInstall' . str_replace(' ', '_', ucwords(str_replace('_', ' ', strtolower($wp_option)))) . 'Schema';
+            $installed = call_user_func([$install_handler_classname, 'install']);
+
+            if($installed) {
+                $twwc_install_settings[$wp_option] = true;
+                TwwcOptions::update_option('install_settings', $twwc_install_settings);
+            }  
         }
     }
  }
 
  $twwcProtein = new TwwcProtein();
  register_activation_hook(__FILE__, [$twwcProtein, 'activate']);
- register_deactivation_hook(__FILE__, [$twwcProtein, 'deactivate']);
  
  use TwwcProtein\Shortcodes\TwwcProteinCalculatorShortcode;
  use TwwcProtein\Shortcodes\TwwcFoodItemsCalculatorShortcode;
 
  use TwwcProtein\Admin\TwwcAdminMenu;
+ use TwwcProtein\Admin\TwwcAdminFoodItems;
 
  add_action('init', function() {      
         $twwcOptions = new TwwcOptions();
@@ -66,6 +88,8 @@ use TwwcProtein\Setup\TwwcInstallSchema;
 
         $twwAdminMenu = new TwwcAdminMenu();
         $twwAdminMenu->register_hooks();
+        $twwAdminFoodItems = new TwwcAdminFoodItems();
+        $twwAdminFoodItems->register_hooks();
 
         add_action('wp_enqueue_scripts', 'twwc_register_styles');
        // add_action('wp_enqueue_scripts', 'twwc_register_scripts');
@@ -74,7 +98,7 @@ use TwwcProtein\Setup\TwwcInstallSchema;
             if(strpos(site_url(), 'localhost') !== false) {
                 $version = null;
             } else {
-                $version = '1.0.77';
+                $version = '1.0.78';
             }
 
             wp_register_style('twwc-protein', TWWC_PROTEIN_PLUGIN_URL . 'resources/css/twwc-protein.css', [], $version, 'all');
