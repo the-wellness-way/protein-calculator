@@ -23,6 +23,8 @@ The TWW Protein Calculator Plugin for WordPress allows users to calculate their 
 
 You can place the `[twwc_protein_calculator]` shortcode in any post or page where you want the protein calculator to appear. This shortcode renders a form that users can interact with to calculate their protein needs.
 
+You can place the `[twwc_food_items]` shortcode in any post or page where you want the food items calcualtor. This shortcode renders a dropdown with a list of food items and their units to grams conversion values.
+
 ### JavaScript Client-Side Functionality
 
 - **Unit Toggle**: Allows users to switch between metric and imperial units; the calculator will convert weights and update calculations accordingly.

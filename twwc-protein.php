@@ -3,7 +3,7 @@
  * Plugin Name: TWW Protein Calculator
  * Author: The Wellness Way
  * Description: A plugin to calculate protein intake.
- * Version: 1.0.2
+ * Version: 1.0.21
  * Tested up to: 6.6
  * Requires at least: 5.0
  * Requires PHP: 5.6.20
