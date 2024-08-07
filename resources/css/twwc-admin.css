@@ -244,3 +244,24 @@
     width: 100px;
     display: inline-block;
 }
+
+.protein-calculator__multi-wrapper-inner-label label {
+    padding: 5px 10px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.protein-calculator__multi-wrapper-inner-label label.active {
+    border-bottom: var(--tww-green) 2px solid;
+}
+
+.protein-calculator__weight-health {
+    display: none;
+}
+
+.protein-calculator__weight-health.active {
+    display: block;
+}
+

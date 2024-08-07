@@ -1,7 +1,7 @@
 <?php
 namespace TwwcProtein\Admin;
 
-use PHPCSExtra\Universal\Sniffs\Arrays\MixedKeyedUnkeyedArraySniff;
+use TwwcProtein\Includes\TwwcView;
 use TwwcProtein\Options\TwwcOptions;
 use TwwcProtein\Admin\TwwcBeans;
 
@@ -143,7 +143,7 @@ class TwwcAdminMenu {
             [$this, 'default_theme_callback'],
             self::COMMON_SETTINGS_PAGE,
             'twwc-common-settings-section',
-            ['max' => 32]
+            []
         );
 
         add_settings_field(
@@ -152,7 +152,7 @@ class TwwcAdminMenu {
             [$this, 'plugin_colors_callback'],
             self::COMMON_SETTINGS_PAGE,
             'twwc-common-settings-section',
-            ['max' => 32]
+            []
         );
 
         /**
@@ -172,7 +172,7 @@ class TwwcAdminMenu {
             [$this, 'default_system_callback'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             'twwc-protein-calculator-settings-section',
-            ['max' => 32]
+            []
         );
 
         add_settings_field(
@@ -181,7 +181,7 @@ class TwwcAdminMenu {
             [$this, 'weight_callback'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             'twwc-protein-calculator-settings-section',
-            ['max' => 32]
+            []
         );
 
         add_settings_field(
@@ -190,7 +190,7 @@ class TwwcAdminMenu {
             [$this, 'pregnant_callback'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             'twwc-protein-calculator-settings-section',
-            ['max' => 32]
+            []
         );
 
         add_settings_field(
@@ -199,7 +199,7 @@ class TwwcAdminMenu {
             [$this, 'activity_level_callback'],
             self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
             'twwc-protein-calculator-settings-section',
-            ['max' => 32]
+            []
         );
 
         register_setting('twwc-common-settings-options', $this->option_group, [$this, 'validate_common_settings']);
@@ -504,7 +504,9 @@ class TwwcAdminMenu {
     }
 
     public function activity_level_callback(): void {
-        $options = TwwcOptions::get_option($this->option_name_protein);
+        $option_name_protein = $this->option_name_protein;
+        $options = TwwcOptions::get_option($option_name_protein);
+
         $class = !empty($value) ? 'has-value' : 'required-value-missing-notice';
         $system = isset($options['system']) ? $options['system'] : 'imperial';
 
@@ -563,47 +565,13 @@ class TwwcAdminMenu {
                     <!-- add the high value here -->
                     <input style='width: 100px' class='".esc_attr($class)." protein-calculator__imperial-input' class='protein-calculator__weight' id='activity-level' name='".esc_attr($this->option_name_protein)."[activity_level][" . esc_attr($activity_level) ."][m_".esc_html($activity_level)."_high_lbs]' type='number' step='.001' value='" . esc_attr($activity_level_value_high_lbs) . "' /> <span>g/lb (high)</span>
                     <input style='width: 100px' class='".esc_attr($class)." protein-calculator__metric-input' class='protein-calculator__weight' id='activity-level' name='".esc_attr($this->option_name_protein)."[activity_level][" . esc_attr($activity_level) ."][m_".esc_html($activity_level)."_high_kg]' type='number' step='.001' value='" . esc_attr($activity_level_value_high_kg) . "' /> <span>g/kg (high)</span>
-                    <div class='protien-calculator__goals'>
-                        <div class='protein-calculator__goal'>
-                            <label>Maintain</label>
-                            <div class='protein-calculator__multipliers'>
-                                <input class='protein-calculator__imperial-input' width='75' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_maintain_lbs]' value='".esc_html($maintain_value_lbs)."' /> <span>g/lb</span>
-                                <input class='protein-calculator__metric-input' width='75' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_maintain_kg]' value='".esc_html($maintain_value_kg)."' /> <span>g/kg</span>
-                                <!-- add the high value here -->
-                                <input class='protein-calculator__imperial-input  width='75' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_maintain_high_lbs]' value='".esc_html($maintain_value_high_lbs)."' /> <span>g/lb (high)</span>
-                                <input class='protein-calculator__metric-input' width='75' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_maintain_high_kg]' value='".esc_html($maintain_value_high_kg)."' /> <span>g/kg (high)</span>
-                            </div>
-                        </div>
-                        <div class='protein-calculator__goal'>
-                            <label>Tone Up</label>
-                            <div class='protein-calculator__multipliers'>
-                                <input class='protein-calculator__imperial-input' width='75' id='sedentary-toning' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_toning_lbs]' value='" . esc_attr($toning_value_lbs) . "' /><span>g/lb</span>
-                                <input class='protein-calculator__metric-input' width='75' id='sedentary-toning' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_toning_kg]' value='" . esc_attr($toning_value_kg) . "' /><span>g/kg</span>
-                                <!-- add the high value here -->
-                                <input class='protein-calculator__imperial-input  width='75' id='sedentary-toning' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_toning_high_lbs]' value='" . esc_attr($toning_value_high_lbs) . "' /><span>g/lb (high)</span>
-                                <input class='protein-calculator__metric-input' width='75' id='sedentary-toning' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_toning_high_kg]' value='" . esc_attr($toning_value_high_kg) . "' /><span>g/kg (high)</span>
-                            </div>
-                        </div>
-                        <div class='protein-calculator__goal'>
-                            <label>Build Muscle</label>
-                            <div class='protein-calculator__multipliers'>
-                                <input class='protein-calculator__imperial-input' width='75' id='sedentary-maintain' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_muscle_growth_lbs]' value='" . esc_attr($muscle_growth_value_lbs) . "' /><span>g/lb</span>
-                                <input class='protein-calculator__metric-input' width='75' id='sedentary-maintain' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_muscle_growth_kg]' value='" . esc_attr($muscle_growth_value_kg) . "' /><span>g/kg</span>
-                                <!-- add the high value here -->
-                                <input class='protein-calculator__imperial-input  width='75' id='sedentary-maintain' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_muscle_growth_high_lbs]' value='" . esc_attr($muscle_growth_value_high_lbs) . "' /><span>g/lb (high)</span>
-                                <input class='protein-calculator__metric-input' width='75' id='sedentary-maintain' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_muscle_growth_high_kg]' value='" . esc_attr($muscle_growth_value_high_kg) . "' /><span>g/kg (high)</span>
-                            </div>
-                        </div>       
-                        <div class='protein-calculator__goal protein-calculator__goal--static'>
-                            <label>Lose Weight</label>
-                            <div class='protein-calculator__multipliers'>
-                                <input class='protein-calculator__imperial-input' width='75' id='sedentary-muscle-growth' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_weight_loss_lbs]' value='".esc_attr($weight_loss_value_lbs ) . "' /> <span>g/lb</span>
-                                <input class='protein-calculator__metric-input' width='75' id='sedentary-muscle-growth' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_weight_loss_kg]' value='".esc_attr($weight_loss_value_kg ) . "' /> <span>g/kg</span>
-                                <!-- add the high value here -->
-                                <input class='protein-calculator__imperial-input  width='75' id='sedentary-muscle-growth' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_weight_loss_high_lbs]' value='".esc_attr($weight_loss_value_high_lbs ) . "' /> <span>g/lb (high)</span>
-                                <input class='protein-calculator__metric-input' width='75' id='sedentary-muscle-growth' type='number' step='.001' name='".esc_attr($this->option_name_protein)."[activity_level][".esc_html($activity_level)."][goal][m_weight_loss_high_kg]' value='".esc_attr($weight_loss_value_high_kg ) . "' /> <span>g/kg (high)</span>
-                            </div>
-                        </div>
+                    
+                    <div class='protein-calculator__multi-wrapper'>
+                    ";
+                    
+                    TwwcView::render('admin-settings-goals', get_defined_vars(), 'templates/admin/settings');
+
+                    echo "
                     </div>
                 </div>
             </div>
