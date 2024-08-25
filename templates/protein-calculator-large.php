@@ -134,7 +134,7 @@ $results_content = isset($protein_settings['content']) && isset($protein_setting
                 </div> -->
 
                 <div class="protein-message" style="margin-top: 20px;">
-                    <div class="protein-data-requirements" style="font-size: 13px; color:<?php echo esc_attr($results_text_color_value); ?>;">
+                    <div class="protein-data-requirements" style="font-size: 11px; color:<?php echo esc_attr($results_text_color_value); ?>;">
                         <span>*</span> Weight is required.
                     </div>
                 </div>

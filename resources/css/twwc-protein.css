@@ -121,7 +121,7 @@
     color: var(--tww-white);
 }
 
-.protein-calculator__radio {
+input[type="radio"].protein-calculator__radio {
     display: none;
 }
 
@@ -261,11 +261,25 @@ input[type="radio"].toggle-right + label {
     margin-bottom: 10px;
 }
 
+.protein-calculator--large .protein-calculator--results__label label {
+    display: block;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: normal;
+    color: var(--tww-dark-grey);
+    margin-bottom: 20px;
+}
+
+.protein-calculator--large .protein-calculator__weight + span {
+    margin-left: 10px;
+}
+
 .protein-calculator--results__value .the-result {
     font-size: 44px;
     font-family: Bebas Neue Pro Expanded ExtraBold;
     color: black;
     margin-bottom: 15px;
+    display: block;
 }
 
 .results-header {
@@ -459,3 +473,4 @@ protein-calculator--compact  .protein-calculator-inner > div {
 .protein-calculator__inputs--radio-reg-label label:hover {
     background-color: #ddd; /* Slightly darker background on hover */
 }
+
