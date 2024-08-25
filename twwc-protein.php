@@ -31,7 +31,7 @@ if(!defined('TWWC_PROTEIN_PLUGIN_URL')) {
 }
 
 if(!defined('TWWC_PROTEIN_ASSETS_VERSION')) {
-    define('TWWC_PROTEIN_ASSETS_VERSION', plugin_dir_url(__FILE__));
+    define('TWWC_PROTEIN_ASSETS_VERSION', '1.0.0');
 }
 
 require_once 'vendor/autoload.php';
@@ -62,7 +62,10 @@ use TwwcProtein\Options\TwwcOptions;
 
             //e.g. convert protein_settings to TwwcInstallProtein_SettingsSchema
             $install_handler_classname = 'TwwcProtein\Setup\TwwcInstall' . str_replace(' ', '_', ucwords(str_replace('_', ' ', strtolower($wp_option)))) . 'Schema';
-            $installed = call_user_func([$install_handler_classname, 'install']);
+            
+            if(class_exists($install_handler_classname)) {
+                $installed = $install_handler_classname::install();
+            }
 
             if($installed) {
                 $twwc_install_settings[$wp_option] = true;
@@ -77,6 +80,7 @@ use TwwcProtein\Options\TwwcOptions;
  
  use TwwcProtein\Shortcodes\TwwcProteinCalculatorShortcode;
  use TwwcProtein\Shortcodes\TwwcFoodItemsCalculatorShortcode;
+ use TwwcProtein\Shortcodes\TwwcBMICalculatorShortcode;
 
  use TwwcProtein\Admin\TwwcAdminMenu;
  use TwwcProtein\Admin\TwwcAdminFoodItems;
@@ -85,6 +89,7 @@ use TwwcProtein\Options\TwwcOptions;
         $twwcOptions = new TwwcOptions();
         $twwProteinCalculatorShortcode = new TwwcProteinCalculatorShortcode();
         $twwcFoodItemsCalculatorShortcode = new TwwcFoodItemsCalculatorShortcode();
+        $twwcFoodItemsCalculatorShortcode = new TwwcBMICalculatorShortcode();
 
         $twwAdminMenu = new TwwcAdminMenu();
         $twwAdminMenu->register_hooks();
@@ -105,5 +110,3 @@ use TwwcProtein\Options\TwwcOptions;
             wp_enqueue_style('twwc-protein');
         }
  });
-
- 

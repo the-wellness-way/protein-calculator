@@ -21,9 +21,7 @@ const ui = {
 };
 
 const initManageEnableValue = () => {
-  console.log(',amag')
   if(ui.activityLevelEnable.length) {
-    console.log("inside manage")
     ui.activityLevelEnable.forEach(input => {
       input.addEventListener('click', (e) => {
         console.log(e.target.checked)
@@ -285,6 +283,25 @@ const Defaults = {
     }
   }
 
+  const initMultiWrapperTabs = () => {
+    const tabs = document.querySelectorAll('.protein-calculator__multi-wrapper-inner-label label');
+
+    if(tabs.length) {
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          const target = e.target;
+          const parent = target.parentElement;
+          
+          parent.querySelectorAll('label').forEach(label => {
+            label.classList.remove('active');
+          });
+
+          target.classList.add('active');
+        });
+    });
+  }
+}
+
 (function() {
     if(defaultButton) {
         initButton();
@@ -295,6 +312,8 @@ const Defaults = {
     }
 
     initManageEnableValue();
+
+    initMultiWrapperTabs();
 })();
 
 

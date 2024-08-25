@@ -10,7 +10,8 @@ class TwwcInstallSettingsSchema {
                 "default" => "compact",
                 "plugin_colors" => [
                     "primary" => "#E6F1D9",
-                    "fields_color" => "#80b741"
+                    "fields_color" => "#80b741",
+                    "results_text_color" => "#000000"
                 ]
             ]
         ];
