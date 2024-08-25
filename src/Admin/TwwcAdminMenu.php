@@ -413,6 +413,7 @@ class TwwcAdminMenu {
         $options = TwwcOptions::get_option($this->option_name);
         $value = isset($options['theme_options']['plugin_colors']['primary']) && !empty($options['theme_options']['plugin_colors']['primary']) ? $options['theme_options']['plugin_colors']['primary'] : '#E6F1D9';
         $fields_color_value = isset($options['theme_options']['plugin_colors']['fields_color']) && !empty($options['theme_options']['plugin_colors']['fields_color']) ? $options['theme_options']['plugin_colors']['fields_color'] : '#80b741';
+        $results_text_color_value = isset($options['theme_options']['plugin_colors']['results_text_color']) && !empty($options['theme_options']['plugin_colors']['results_text_color']) ? $options['theme_options']['plugin_colors']['results_text_color'] : '#000000';
 
         echo '
             <div class="plugin-colors form-group">
@@ -422,6 +423,10 @@ class TwwcAdminMenu {
             <div class="plugin-colors form-group">
                 <label for="plugin-color-fields">Fields Color</label>
                 <input class="twwc-plugin-colors" type="text" name="' . esc_attr($this->option_name) . '[theme_options][plugin_colors][fields_color]" value="' . esc_attr($fields_color_value) . '" />
+            </div>
+            <div class="plugin-colors form-group">
+                <label for="plugin-color-fields">Results Text Color</label>
+                <input class="twwc-plugin-colors" type="text" name="' . esc_attr($this->option_name) . '[theme_options][plugin_colors][results_text_color]" value="' . esc_attr($results_text_color_value) . '" />
             </div>
         ';
     }

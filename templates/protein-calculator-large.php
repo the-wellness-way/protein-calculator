@@ -3,6 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 $bg_color = isset($settings['theme_options']['plugin_colors']) && isset($settings['theme_options']['plugin_colors']['primary']) ? $settings['theme_options']['plugin_colors']['primary'] : '#E6F1D9';
 $fields_color_value = isset($settings['theme_options']['plugin_colors']) && isset($settings['theme_options']['plugin_colors']['fields_color']) ? $settings['theme_options']['plugin_colors']['fields_color'] : '#80b741';
+$results_text_color_value = isset($settings['theme_options']['plugin_colors']) && isset($settings['theme_options']['plugin_colors']['results_text_color']) ? $settings['theme_options']['plugin_colors']['results_text_color'] : '#000000';
 $system = $protein_settings['system'] ?? null;
 $activity_level = $protein_settings['activity_level'] ?? null;
 $activity_level_default = $protein_settings['defaults'] && $protein_settings['defaults']['activity_level'] ? $protein_settings['defaults']['activity_level'] : null;
@@ -13,6 +14,10 @@ $results_content = isset($protein_settings['content']) && isset($protein_setting
     .protein-calculator__inputs--radio label {
         <?php echo "border-color: ".$fields_color_value." !important;"; ?>
         <?php echo "color: ".$fields_color_value." !important;"; ?>
+    }
+
+    .protein-calculator__inputs--radio input[type="radio"]:checked + label {
+        <?php echo "color: ".$results_text_color_value." !important;"; ?>
     }
 </style>
 
@@ -111,11 +116,11 @@ $results_content = isset($protein_settings['content']) && isset($protein_setting
             <div class="protein-calculator--results-inner" style="background-color: <?php echo esc_attr($bg_color); ?>;">     
                 <div class="protein-calculator--results-low-end" style="margin-bottom: 20px;">
                     <div class="protein-calculator--results__label">
-                        <label for="protein">Your Optimal Protein Intake</label>
+                        <label for="protein" style="color:<?php echo esc_attr($results_text_color_value); ?>;">Your Optimal Protein Intake</label>
                     </div>
                     <div class="protein-calculator--results__value">
-                        <span class='the-result'>&mdash;</span> 
-                        <p><span  id="calculator-system-suffix">grams/day</span>
+                        <span class='the-result' style="color:<?php echo esc_attr($results_text_color_value); ?>;">&mdash;</span> 
+                        <p><span  id="calculator-system-suffix" style="color:<?php echo esc_attr($results_text_color_value); ?>;">grams/day</span>
                     </div>
                 </div>
 <!-- 
@@ -129,7 +134,7 @@ $results_content = isset($protein_settings['content']) && isset($protein_setting
                 </div> -->
 
                 <div class="protein-message" style="margin-top: 20px;">
-                    <div class="protein-data-requirements" style="font-size: 13px;">
+                    <div class="protein-data-requirements" style="font-size: 13px; color:<?php echo esc_attr($results_text_color_value); ?>;">
                         <span>*</span> Weight is required.
                     </div>
                 </div>
