@@ -1,8 +1,9 @@
 .protein-calculator-container {
-    --brand-green: rgb(128, 183, 65);
-    --brand-grey: rgb(136, 136, 136);
-    --border-grey: rgb(204, 204, 204);
-    --border-grey-light: rgb(238, 238, 238);
+    --brand-green: #80b741;
+    --brand-grey: #888888; /* rgb(136, 136, 136) */
+    --border-grey: #cccccc; /* rgb(204, 204, 204) */
+    --border-grey-light: #eeeeee; /* rgb(238, 238, 238) */
+    --myabsorbGrey: #45494c; /* rgb(69, 73, 76) */
 
     --tww-green: #80b741;
     --tww-dark-grey: #414444;
@@ -14,13 +15,13 @@
 
     --tww-white: white;
 
-    --black: rgb(0, 0, 0);
-    --red: rgb(153, 27, 27);
+    --black: #000000; /* rgb(0, 0, 0) */
+    --red: #991b1b; /* rgb(153, 27, 27) */
 
-    --active: rgb(220, 252, 231);
-    --active-alt: rgb(22, 101, 52);
+    --active: #dcfce7; /* rgb(220, 252, 231) */
+    --active-alt: #166534; /* rgb(22, 101, 52) */
     --canceled: var(--red);
-    --pending: rgb(255, 255, 0);
+    --pending: #ffff00; /* rgb(255, 255, 0) */
 }
 
 .protein-calculator {

@@ -7,7 +7,7 @@
  * Tested up to: 6.6
  * Requires at least: 5.0
  * Requires PHP: 5.6.20
- * Author: Bluefield Identity Inc.
+ * Author: Philip Rudy
  * Author URI: https://www.thewellnessway.com/
  * License: GPLv2
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
