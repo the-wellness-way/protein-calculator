@@ -3,7 +3,7 @@
  * Plugin Name: TWW Protein Calculator
  * Author: The Wellness Way
  * Description: A plugin to calculate protein intake.
- * Version: 1.0.22
+ * Version: 1.0.23
  * Tested up to: 6.6
  * Requires at least: 5.0
  * Requires PHP: 5.6.20
@@ -31,7 +31,7 @@ if(!defined('TWWC_PROTEIN_PLUGIN_URL')) {
 }
 
 if(!defined('TWWC_PROTEIN_ASSETS_VERSION')) {
-    define('TWWC_PROTEIN_ASSETS_VERSION', '1.0.0');
+    define('TWWC_PROTEIN_ASSETS_VERSION', '1.0.01');
 }
 
 require_once 'vendor/autoload.php';
@@ -102,7 +102,7 @@ use TwwcProtein\Options\TwwcOptions;
             if(strpos(site_url(), 'localhost') !== false) {
                 $version = null;
             } else {
-                $version = '1.0.78';
+                $version = '1.0.79';
             }
 
             wp_register_style('twwc-protein', TWWC_PROTEIN_PLUGIN_URL . 'resources/css/twwc-protein.css', [], $version, 'all');

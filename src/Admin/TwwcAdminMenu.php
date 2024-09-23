@@ -176,6 +176,15 @@ class TwwcAdminMenu {
         );
 
         add_settings_field(
+            'twwc-header',
+            __('Header', 'twwc-protein'),
+            [$this, 'header_callback'],
+            self::PROTEIN_CALCULATOR_SETTINGS_PAGE,
+            'twwc-protein-calculator-settings-section',
+            []
+        );
+
+        add_settings_field(
             'twwc-weight',
             '<span class="required">*</span> '. __('Weight', 'twwc-protein'),
             [$this, 'weight_callback'],
@@ -450,6 +459,27 @@ class TwwcAdminMenu {
             <div class='default-system'>
                 <input class='protein-calculator__units-measurement' type='radio' name='" . esc_attr($this->option_name_protein) . "[system]' value='imperial'" . ('imperial' === $value ? 'checked' : '') . ">Imperial</input> 
                 <input class='protein-calculator__units-measurement' type='radio' name='" . esc_attr($this->option_name_protein) . "[system]' value='metric'" . ('metric' ===  $value ? 'checked' : '') . ">Metric</input>
+            </div>
+        ";
+    }
+
+    public function header_callback() {
+        $options = TwwcOptions::get_option($this->option_name_protein);
+        $value = isset($options['header']) ? $options['header'] : '';
+        $header_tag = isset($options['header_tag']) ? $options['header_tag'] : 'h2';
+        echo " 
+            <div class='protein-calculator__form-group'>
+                <p><span>If left blank, the header will not be generated.</span></p>
+                <div class='header-cb' style='display: flex;'>
+                    <input style='width: 400px;' class='protein-calculator__header' type='text' name='" . esc_attr($this->option_name_protein) . "[header]' value='".$value."' /> 
+                    <select name='" . esc_attr($this->option_name_protein) . "[header_tag]'>
+                        <option value='h1' " . selected($header_tag, 'h1', false) . ">H1</option>
+                        <option value='h2' " . selected($header_tag, 'h2', false) . ">H2</option>
+                        <option value='h3' " . selected($header_tag, 'h3', false) . ">H3</option>
+                        <option value='h4' " . selected($header_tag, 'h4', false) . ">H4</option>
+                        <option value='p' " . selected($header_tag, 'p', false) . ">Paragraph</option>
+                    </select>
+                </div>
             </div>
         ";
     }

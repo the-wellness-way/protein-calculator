@@ -181,7 +181,7 @@ const twwc_initCalculation = () => {
             if('' === totalProtein) {
                 // we want an m-dash to show that the field is empty
                 twwc_ui.results.innerHTML = '&mdash;';
-                twwc_ui.resultsHighEnd.innerHTML = '';
+                //twwc_ui.resultsHighEnd.innerHTML = '';
             }
         } else {        
             twwc_ui.results.innerHTML = totalProtein;
