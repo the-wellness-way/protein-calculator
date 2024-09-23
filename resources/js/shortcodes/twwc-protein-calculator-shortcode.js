@@ -39,20 +39,28 @@ const twwc_setCalcData = (key, value) => {
 };
 
 const twwc_initWeightToggles = () => {
-    twwc_ui.weightToggles.forEach(toggle => {
-        toggle.addEventListener('click', (e) => {
-            let system = e.target.value;
+    containers = document.querySelector('.protein-calculator-container');
+    containers.forEach((container) => {
+        //find the weight toggle
+        const weightToggle = container.querySelectorAll('.protein-calculator__weight-toggle');
 
-            if(system === 'imperial') {
-                document.getElementById('weight_lbs').classList.remove('hide');
-                document.getElementById('weight_kg').classList.add('hide');
-            } else {            
-                document.getElementById('weight_kg').classList.remove('hide');
-                document.getElementById('weight_lbs').classList.add('hide');
-            }
+        if(weightToggle) {
+            weightToggle.forEach((toggle) => {
+                toggle.addEventListener('click', (e) => {
+                    let system = e.target.value;
 
-            twwc_convertToSystem(system);
-        });
+                    // if(system === 'imperial') {
+                    //     document.getElementById('weight_lbs').classList.remove('hide');
+                    //     document.getElementById('weight_kg').classList.add('hide');
+                    // } else {            
+                    //     document.getElementById('weight_kg').classList.remove('hide');
+                    //     document.getElementById('weight_lbs').classList.add('hide');
+                    // }
+
+                    twwc_convertToSystem(system);
+                });
+            });
+        }
     });
 }
     

@@ -54,15 +54,28 @@
    width: 25%;
    margin-right: 20px;
    font-size: 15px;
+   text-align: left;
 }
 
 .protein-calculator--large .protein-calculator__inputs {
-    max-width: 350px;
+    max-width: 300px;
 } 
 
 .protein-calculator--compact .protein-calculator__inputs {
     max-width: 400px;
 } 
+
+.protein-calculator--large input[type="text"],
+.protein-calculator--large input[type="email"],
+.protein-calculator--large input[type="phone"],
+.protein-calculator--large input[type="number"] {
+    height: 50px;
+    padding: 0 10px;
+}
+
+.protein-calculator--large .protein-calculator input::placeholder {
+    color: var(--tww-medium-grey) !important; /* Gray placeholder text */
+}
 
 @media(max-width: 768px) {
     .protein-calculator--large .protein-calculator__label {
